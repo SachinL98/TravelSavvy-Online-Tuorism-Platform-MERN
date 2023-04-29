@@ -18,6 +18,9 @@ connection.once("open", () => {
   console.log("Database Connection Successful");
 })
 
+const eventRouter = require("./routes/EventRoute");
+app.use("/event", eventRouter);
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
 })
