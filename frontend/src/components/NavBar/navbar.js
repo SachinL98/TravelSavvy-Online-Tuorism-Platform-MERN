@@ -6,11 +6,11 @@ export default function navbar() {
     <div className="navbar">
       <div className="navContainer">
         <Link to="/" style={{color:"white",textDecoration:"none"}}>
-          <span className="logo">Booking.com</span>
+          <span className="logo">Travel Savy</span>
         </Link>
         <div className="navItems">
-          <button className="navButton">Register</button>
-          <button className="navButton">Login</button>
+          <button className="navButton" type="button" class="btn btn-light" style={{marginRight: "10px"}}>Register</button>
+          <button className="navButton" type="button" class="btn btn-light">Login</button>
         </div>
       </div>
     </div>
