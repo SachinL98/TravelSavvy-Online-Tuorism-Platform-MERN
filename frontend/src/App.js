@@ -3,8 +3,9 @@ import Navbar from "./components/NavBar/navbar.js";
 import Home from './pages/Home/home.js'
 import List from './pages/Lists/list.js'
 import Hotel from './pages/Hotel/hotel.js'
-import Events from "./pages/Events/Events.js";
-import AddEvent from "./pages/Events/AddEvent.js";
+
+import Login from './pages/login/Login.js'
+import Signup from './pages/signUp/Signup.js'
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/hotels" element={<List/>} />
         <Route path="/hotels/:id" element={<Hotel/>} />
-        <Route path="/events" element={<Events/>} />
-        <Route path="/addEvent" element={<AddEvent/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Signup/>} />
       </Routes>
     </BrowserRouter>
   );

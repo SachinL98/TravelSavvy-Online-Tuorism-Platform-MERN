@@ -24,7 +24,7 @@ router.get('/find/:id',getOneHotel);
 
 
 router.get('/countByCity',countByCity);
-router.get('/countByType',countByType);getFeaturedHotels
+router.get('/countByType',countByType);
 
 router.get('/getFeaturedHotels',getFeaturedHotels);
 

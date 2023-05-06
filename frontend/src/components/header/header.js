@@ -15,6 +15,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function Header({ type }) {
   const [openDate, setOpenDate] = useState(false);
@@ -52,6 +53,9 @@ export default function Header({ type }) {
     navigate("/hotels", { state: { destination, date, options } });
   };
 
+
+  const { user } = useAuthContext();
+
   return (
     <div className="header">
       <div
@@ -84,7 +88,7 @@ export default function Header({ type }) {
               Save 10% or more at participating properties – just look for the
               blue Genius label.
             </p>
-            <button className="headerBtn">Sign in / Register</button>
+            {!user && <button className="headerBtn">Sign in / Register</button>}
 
             <div className="headerSearch">
               <div className="headerSearchItem">
