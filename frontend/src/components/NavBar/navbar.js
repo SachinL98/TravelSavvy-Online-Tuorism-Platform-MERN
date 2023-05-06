@@ -12,6 +12,7 @@ export default function Navbar() {
 
     <div className="navbar">
       <div className="navContainer">
+
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>
           <span className="logo">Booking.com</span>
         </Link>
@@ -23,6 +24,7 @@ export default function Navbar() {
             <button className="navButton">Register</button>
           </Link>
         </div>)}
+
       </div>
     </div>
   );
