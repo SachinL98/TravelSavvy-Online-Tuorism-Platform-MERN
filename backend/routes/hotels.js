@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {createHotel, updateHotel, getOneHotel, getAllHotels,deleteHotel ,countByCity , countByType,getFeaturedHotels} = require('../controllers/hotelController')
+const {createHotel, updateHotel, getOneHotel, getAllHotels,deleteHotel ,countByCity , countByType,getFeaturedHotels,getHotelRooms} = require('../controllers/hotelController')
 
 
 
@@ -27,6 +27,8 @@ router.get('/countByCity',countByCity);
 router.get('/countByType',countByType);
 
 router.get('/getFeaturedHotels',getFeaturedHotels);
+
+router.get('/room/:id',getHotelRooms);
 
 
 

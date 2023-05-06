@@ -5,15 +5,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import {useNavigate} from 'react-router-dom'
+import Reserve from "../../components/reserveHotel/reserve";
 
 export default function Hotel() {
 
   const location = useLocation()
 
   const id = location.pathname.split("/")[2];
+
+  const [openModel,setOpenModel] = useState(false)
   
+
+  const navigate = useNavigate()
 
   const { data, loading, error } = useFetch(
     `http://localhost:8000/api/hotel/find/${id}`
@@ -46,6 +53,21 @@ const perDay = 1000*60*60*24
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
   ];
+
+
+  //get user
+  const { user } = useAuthContext();
+
+  const handleClick = ()=>{
+      if(user){
+
+        navigate(`/reserve/${id}`)
+
+      }else{
+        navigate('/login')
+      }
+  }
+
   return (
     <div>
       <Navbar />
@@ -53,7 +75,7 @@ const perDay = 1000*60*60*24
 
       { loading ? "loading" :  <div className="hotelContainer">
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now</button>
+          <button className="bookNow" onClick={handleClick}>Reserve or Book Now</button>
           <h1 className="hotelTitle">{data.name}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -89,7 +111,7 @@ const perDay = 1000*60*60*24
               <h2>
                 <b>Rs. {days * data.cheapestPrice}.00</b> ({days} nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>

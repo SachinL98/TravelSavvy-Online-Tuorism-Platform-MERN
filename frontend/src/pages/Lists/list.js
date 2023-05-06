@@ -26,7 +26,6 @@ export default function List() {
     } `
   );
 
-  console.log(data);
 
   const handleClick = () => {
     reFetch();

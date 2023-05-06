@@ -4,6 +4,7 @@ import List from './pages/Lists/list.js'
 import Hotel from './pages/Hotel/hotel.js'
 import Login from './pages/login/Login.js'
 import Signup from './pages/signUp/Signup.js'
+import Reserve from './components/reserveHotel/reserve.js'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Signup/>} />
+        <Route path="/reserve/:id" element={<Reserve/>} />
       </Routes>
     </BrowserRouter>
   );

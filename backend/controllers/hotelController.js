@@ -1,5 +1,6 @@
 const express = require("express");
 const Hotel = require("../models/HotelModel");
+const Room = require('../models/RoomsModel')
 
 const createHotel = async (req, res) => {
   const newHotel = new Hotel(req.body);
@@ -89,12 +90,23 @@ const countByType = async (req, res) => {
   }
 };
 
-
 const getFeaturedHotels = async (req, res, next) => {
-  
   try {
     const hotels = await Hotel.find(req.query).limit(3);
     res.status(200).json(hotels);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getHotelRooms = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    const roomsList = await Promise.all(hotel.rooms.map(room=>{
+      return Room.findById(room)
+    }))
+
+    res.status(200).json(roomsList)
   } catch (err) {
     next(err);
   }
@@ -108,5 +120,6 @@ module.exports = {
   getOneHotel,
   countByCity,
   countByType,
-  getFeaturedHotels
+  getFeaturedHotels,
+  getHotelRooms,
 };
