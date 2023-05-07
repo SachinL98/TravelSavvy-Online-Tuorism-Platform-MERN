@@ -1,13 +1,15 @@
+import "./index.css";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //pages & components
-import TripPlan from "./pages/TripPlan";
+import TripPlan from "./Pages/TripPlan";
 
 //Train
-import AddNewTrain from "./components/train/AddNewTrain";
-import AllTrains from "./components/train/AllTrains";
-import EditTrain from "./components/train/EditTrain";
-import OneTrain from "./components/train/OneTrain";
+import AddNewTrain from "./Components/train/AddNewTrain";
+import AllTrains from "./Components/train/AllTrains";
+import EditTrain from "./Components/train/EditTrain";
+import OneTrain from "./Components/train/OneTrain";
 
 //car rental
 import "./App.css";

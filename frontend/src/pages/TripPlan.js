@@ -1,11 +1,10 @@
-import React from 'react'
-import GoogleMapComponent from '../components/googleMap'
+import React from "react";
+import GoogleMapComponent from "../Components/googleMap";
 
-export default function 
-() {
+export default function () {
   return (
     <div>
-        <GoogleMapComponent/>
+      <GoogleMapComponent />
     </div>
-  )
+  );
 }
