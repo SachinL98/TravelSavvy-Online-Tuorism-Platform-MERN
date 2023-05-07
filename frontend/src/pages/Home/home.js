@@ -8,7 +8,6 @@ import FeaturedProperties from '../../components/featuredProperties/featuredProp
 export default function home() {
   return (
     <div>
-      <Navbar/>
       <Header/>
       <div className="homeContainer">
         <Featured/>

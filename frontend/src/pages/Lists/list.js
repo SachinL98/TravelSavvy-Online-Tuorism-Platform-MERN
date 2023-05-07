@@ -34,7 +34,6 @@ export default function List() {
 
   return (
     <div>
-      <NavBar />
       <Header type="lists" />
 
       <div className="listContainer">

@@ -1,76 +1,54 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function eventList() {
+export default function EventList() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userID = user.user._id;
+  const [events, setEvents] = useState([]);
+
+  useEffect(()=>{
+    axios.get('http://localhost:8000/api/event/')
+    .then((res)=>{
+      setEvents(res.data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },[]);
+
+  function addToWishList(event){
+    const wishListItem = {userID, event};
+
+    axios.post(`http://localhost:8000/api/wishlist/add`, wishListItem)
+    .then(()=>{
+      window.alert('Added to wishlist');
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  };
+
   return (
     <div>
-      <div class="row row-cols-1 row-cols-md-3 g-4" >
+      <div class="row row-cols-1 row-cols-md-4 g-4" >
+      {events.map((eventData)=>(
         <div class="col">
-          <div class="card" style={{margin: "10px"}}>
-            <img src="https://picsum.photos/500/200" class="card-img-top" alt="https://picsum.photos/200"  />
+            <div class="card" style={{margin: "10px"}}>
+            <img src={eventData.image} class="card-img-top" alt=""/>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
+              <h5 class="card-title"><b>{eventData.name}</b></h5>
+              <p class="card-text">{eventData.description}</p>
               <div>
-                <button type="button" class="btn btn-primary" style={{marginRight: "10px"}}>View Details</button>
-                <button type="button" class="btn btn-warning">Add To Wish List</button>
+                <Link to={`/oneEvent/${eventData._id}`}><button type="button" class="btn btn-primary btn-sm" style={{marginRight: "10px"}}>View Details</button></Link> 
+                {user.user.type == 'traveller' && (
+                    <button onClick={() => addToWishList(eventData)} type="button" class="btn btn-warning btn-sm">Add To Wish List</button>
+                )} 
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card" style={{margin: "10px"}}>
-            <img src="https://picsum.photos/500/200" class="card-img-top" alt="https://picsum.photos/200" />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <div>
-                <button type="button" class="btn btn-primary" style={{marginRight: "10px"}}>View Details</button>
-                <button type="button" class="btn btn-warning">Add To Wish List</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card" style={{margin: "10px"}}>
-            <img src="https://picsum.photos/500/200" class="card-img-top" alt="https://picsum.photos/200"  />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content.
-              </p>
-              <div>
-                <button type="button" class="btn btn-primary" style={{marginRight: "10px"}}>View Details</button>
-                <button type="button" class="btn btn-warning">Add To Wish List</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card" style={{margin: "10px"}}>
-            <img src="https://picsum.photos/500/200" class="card-img-top" alt="https://picsum.photos/200" />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <div>
-                <button type="button" class="btn btn-primary" style={{marginRight: "10px"}}>View Details</button>
-                <button type="button" class="btn btn-warning">Add To Wish List</button>
-              </div>
-            </div>
-          </div>
-        </div>
+         ))}
       </div>
     </div>
   );

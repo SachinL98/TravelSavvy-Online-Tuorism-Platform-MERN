@@ -1,43 +1,42 @@
 const express = require("express");
-const User = require("../models/UserModel");
+const mongoose = require("mongoose");
+const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
+require('dotenv').config()
 
-const updateUser = async (req, res) => {
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' });
+};
+
+//login user
+const loginUser = async (req, res) => {
+
+    const {email,password} = req.body
+
+
+    try {
+        const user = await User.login(email,password)
+        const token = createToken(user._id)
+        res.status(200).json({ user, token });
+
+    } catch (error) {
+         res.status(400).json({ error: error.message });
+    }
+ 
+};
+
+//signup user
+const signupUser = async (req, res) => {
+  const { firstname,lastname,mobilenumber,type,email,password,confirmpassword } = req.body;
+
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-      $set: req.body,
-    });
-
-    res.status(200).json(updatedUser);
-  } catch (err) {
-    res.status(500).json("error");
+    const user = await User.signup(firstname,lastname,mobilenumber,type,email,password,confirmpassword);
+    //create token
+    const token = createToken(user._id);
+    res.status(200).json({ user, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
-const deleteUser = async (req, res) => {
-  try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    res.status(200).json(deletedUser);
-  } catch (err) {
-    res.status(500).json("error");
-  }
-};
-
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json("error");
-  }
-};
-
-const getOneUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.status(200).json(user);
-  } catch (err) {
-    next(err);
-  }
-};
-
-module.exports = { updateUser, deleteUser, getOneUser, getAllUsers };
+module.exports = { loginUser, signupUser };
