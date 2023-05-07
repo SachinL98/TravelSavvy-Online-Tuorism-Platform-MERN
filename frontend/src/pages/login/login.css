@@ -30,7 +30,7 @@ input[type=text],[type=email],[type=password] {
   box-sizing: border-box;
 }
 form button {
-  background: #0071c2;
+  background: #003580;
   border: 0;
   color: #fff;
   padding: 10px;
@@ -73,5 +73,6 @@ form.signup, form.login {
 }
 
 .link span{
-  color: #0071c2;
+  color: #003580;
+  font-weight: bold;
 }

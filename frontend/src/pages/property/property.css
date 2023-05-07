@@ -1,0 +1,29 @@
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto&display=swap');
+
+
+
+.listcontainer{
+    margin: 80px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.titles{
+    display: flex;
+    justify-content: space-between;
+}
+
+.addListBtn{
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.addListBtn:hover{
+  background-color: #003580;
+    color: #febb02;
+}

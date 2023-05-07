@@ -112,6 +112,16 @@ const getHotelRooms = async (req, res, next) => {
   }
 };
 
+const getHotelByUser = async (req, res, next) => {
+  try {
+    const hotels = await Hotel.find({userID:req.params.id})
+    
+    res.status(200).json(hotels)
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createHotel,
   updateHotel,
@@ -122,4 +132,5 @@ module.exports = {
   countByType,
   getFeaturedHotels,
   getHotelRooms,
+  getHotelByUser,
 };

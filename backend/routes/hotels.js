@@ -1,35 +1,47 @@
 const express = require("express");
 const router = express.Router();
-const {createHotel, updateHotel, getOneHotel, getAllHotels,deleteHotel ,countByCity , countByType,getFeaturedHotels,getHotelRooms} = require('../controllers/hotelController')
-
-
-
-
+const {
+  createHotel,
+  updateHotel,
+  getOneHotel,
+  getAllHotels,
+  deleteHotel,
+  countByCity,
+  countByType,
+  getFeaturedHotels,
+  getHotelRooms,
+  getHotelByUser,
+} = require("../controllers/hotelController");
 
 //CREATE
-router.post('/',createHotel);
+router.post("/", createHotel);
 
 //UPDATE
-router.put('/:id',updateHotel);
-  
+router.put("/:id", updateHotel);
+
 //DELETE
-router.delete('/:id',deleteHotel);
+router.delete("/:id", deleteHotel);
 
 //GET All
-router.get('/',getAllHotels);
+router.get("/", getAllHotels);
 
 //GET ONE
-router.get('/find/:id',getOneHotel);
+router.get("/find/:id", getOneHotel);
 
 
+//GET HOTEL COUNT BY CITY
+router.get("/countByCity", countByCity);
 
-router.get('/countByCity',countByCity);
-router.get('/countByType',countByType);
+//GET HOTEL COUNT BY TYPE Eg:Hotel , Villa
+router.get("/countByType", countByType);
 
-router.get('/getFeaturedHotels',getFeaturedHotels);
+//GET FEATURED HOTEL FEATURE == TRUE
+router.get("/getFeaturedHotels", getFeaturedHotels);
 
-router.get('/room/:id',getHotelRooms);
+router.get("/room/:id", getHotelRooms);
 
 
+//GET USERS HOTELS
+router.get("/userId/:id", getHotelByUser);
 
 module.exports = router;

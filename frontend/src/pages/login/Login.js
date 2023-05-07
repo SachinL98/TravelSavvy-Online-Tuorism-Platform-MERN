@@ -21,14 +21,15 @@ const Login = () => {
     <div className="background">
       <Navbar />
     <form className="login" style={{backgroundColor:'0071c2'}} onSubmit={handleSubmit} action="">
-      <h3>Login</h3>
+      <h3 style={{color:"#003580" , fontWeight:"bold"}}>Login</h3>
+      <br /><br />
       {error && <div className="error">{error}</div>}
       <label htmlFor="">Email</label>
       <input
         type="email"
         name=""
         onChange={(e) => setEmail(e.target.value)}
-        value={email}
+        value={email} placeholder='example@email.com'
       />
       <label htmlFor="">Password</label>
       <input
@@ -38,7 +39,7 @@ const Login = () => {
         value={password}
       />
 
-      <button disabled={isLoading}>Login</button>
+<center> <button disabled={isLoading} style={{width:"50%"}}>Login</button></center>
 
       <br></br>
       <br></br>

@@ -71,7 +71,7 @@ const perDay = 1000*60*60*24
   return (
     <div>
       <Navbar />
-      <Header type="lists" />
+      
 
       { loading ? "loading" :  <div className="hotelContainer">
         <div className="hotelWrapper">

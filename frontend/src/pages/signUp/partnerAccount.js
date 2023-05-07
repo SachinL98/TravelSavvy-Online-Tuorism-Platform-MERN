@@ -13,7 +13,7 @@ const Signup = () => {
   const [confirmpassword, setCpassword] = useState("");
   const { signup, error, isLoading } = useSignup();
   //const [type, setType] = useState("");
-  const type = "user"
+  const type = "hotelOwner"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,8 +37,8 @@ const Signup = () => {
     <div>
       <Navbar/>
     <form className="signup" onSubmit={handleSubmit} action="">
-      <h3 style={{color:"#003580" , fontWeight:"bold"}}>Sign Up</h3>
-      <br />
+      <h3 style={{color:"#003580" , fontWeight:"bold"}}>Create Our Partner Account</h3>
+      <br /><br />
       {error && <div className="error">{error}</div>}
       <label htmlFor="">First Name</label>
       <input
@@ -60,7 +60,7 @@ const Signup = () => {
         name=""
         onChange={(e) => setMobileNumber(e.target.value)}
         value={mobilenumber} placeholder="eg : 07x xx xx xxx"
-      /> 
+      />
       <label htmlFor="">Email</label>
       <input
         type="email"
@@ -75,7 +75,7 @@ const Signup = () => {
         onChange={(e) => setPassword(e.target.value)}
         value={password} placeholder="Example@123"
       />
-      <label htmlFor="">Confirm Password</label>
+      <label htmlFor="">Password</label>
       <input
         type="password"
         name=""
@@ -83,7 +83,8 @@ const Signup = () => {
         value={confirmpassword} placeholder="Example@123"
       />
 
-<center> <button disabled={isLoading} style={{width:"50%"}}>Sign Up</button></center>
+<center> <button disabled={isLoading} style={{width:"50%"}}>Register</button></center>
+     
 
       <br></br>
       <br></br>

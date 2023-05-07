@@ -5,6 +5,10 @@ import Hotel from './pages/Hotel/hotel.js'
 import Login from './pages/login/Login.js'
 import Signup from './pages/signUp/Signup.js'
 import Reserve from './components/reserveHotel/reserve.js'
+import HotelOwner from './pages/signUp/partnerAccount.js'
+import Property from "./pages/property/property.js";
+import AddProperty from "./pages/addProperty/addProperty.js";
+
 
 function App() {
   return (
@@ -16,6 +20,9 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Signup/>} />
         <Route path="/reserve/:id" element={<Reserve/>} />
+        <Route path="/partnerAccount" element={<HotelOwner/>} />
+        <Route path="/property" element={<Property/>} />
+        <Route path="/addproperty" element={<AddProperty/>} />
       </Routes>
     </BrowserRouter>
   );

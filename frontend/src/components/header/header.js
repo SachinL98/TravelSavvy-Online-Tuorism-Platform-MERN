@@ -83,7 +83,7 @@ export default function Header({ type }) {
         </div>
         {type !== "lists" && (
           <>
-            <h1 className="headerTitle">Sign in, save money</h1>
+            <h1 className="headerTitle">Are you dreaming of a place to stay? We are here!</h1>
             <p className="headerDescription">
               Save 10% or more at participating properties – just look for the
               blue Genius label.
@@ -98,7 +98,7 @@ export default function Header({ type }) {
                   placeholder="Where are You going"
                   className="headerSearchInput"
                   value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
+                  onChange={(e) => setDestination(e.target.value)} required
                 />
               </div>
               <div className="headerSearchItem">
