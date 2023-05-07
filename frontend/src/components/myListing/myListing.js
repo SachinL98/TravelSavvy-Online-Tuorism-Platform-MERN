@@ -26,7 +26,7 @@ export default function MyListing() {
               <div class="card">
                 <img
                   className="cardimgtop"
-                  src="https://cf.bstatic.com/xdata/images/xphoto/300x240/140016353.jpg?k=232ef71e6c3a553cb601e631add2548814977cb28ec5e3af07501d1f25795fb9&o="
+                  src={item.images[0]}
                   alt="Card image cap"
                 />
                 <div className="cardbody">

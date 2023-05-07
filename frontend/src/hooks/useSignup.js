@@ -40,7 +40,7 @@ export const useSignup = () =>{
                  
         }
 
-        console.log(json)
+        //console.log(json)
     }
 
     return {signup,isLoading,error}

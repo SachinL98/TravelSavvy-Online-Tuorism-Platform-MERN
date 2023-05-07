@@ -5,29 +5,53 @@ import Navbar from "../../components/NavBar/navbar";
 import "./addProperty.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function AddProperty() {
-  const [hotelName, setHotelName] = useState("");
+  const [name, setHotelName] = useState("");
   const [city, setcity] = useState("");
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [distance, setdistance] = useState("");
   const [desc, setDesc] = useState("");
-  const [cheapest, setCheapest] = useState("");
-  //const { signup, error, isLoading } = useSignup();
-  const [hoteltype, setHoteType] = useState("");
-  const type = "user";
+  const [cheapestPrice, setCheapest] = useState("");
+  const [type, setHoteType] = useState("");
+  const [images, setSelectedImages] = useState([]);
+  
 
   const handleDropdown = (event) => {
     setHoteType(event.target.value);
   };
 
+  const { user } = useAuthContext();
+  const userID = user.user._id
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(hotelName, city, title, address, distance, desc, cheapest);
-    //await addListing(hotelName, city, title, address, distance, desc, cheapest);
+    console.log(name, city, title, address, distance, desc, cheapestPrice,images,userID);
+    await addListing(name,type ,city, title, address, distance, desc, cheapestPrice,images,userID);
   };
+
+  const onSelectImage = (event) => {
+    const selectedImages = event.target.files;
+    const selectedImageArray = Array.from(selectedImages);
+    const imagesArray = selectedImageArray.map((file) => {
+      return URL.createObjectURL(file);
+    });
+
+    setSelectedImages(imagesArray);
+  };
+
+  const addListing = async (name,type,city, title, address, distance, desc, cheapestPrice,images,userID)=>{
+    const response = await fetch('http://localhost:8000/api/hotel',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({name,type ,city, title, address, distance, desc, cheapestPrice,images,userID})
+        })
+
+        console.log(response)
+  }
 
   return (
     <div>
@@ -35,11 +59,11 @@ export default function AddProperty() {
       <form className="addP" onSubmit={handleSubmit} action="">
         <div className="addPTitles">
           <center>
-            <h2 style={{color:"#003580"}}>Add Property List</h2>
+            <h2 style={{ color: "#003580" }}>Add Property List</h2>
           </center>
           <br />
           <br />
-          <h4 style={{color:"#003580"}}>
+          <h4 style={{ color: "#003580" }}>
             Tell us about your place Share some basic info, like where it is and
             how many guests can stay , it's address and many more .
           </h4>
@@ -52,7 +76,7 @@ export default function AddProperty() {
               type="text"
               name=""
               onChange={(e) => setHotelName(e.target.value)}
-              value={hotelName}
+              value={name}
               placeholder="eg : Example Hotel"
             />
             <label htmlFor="">city</label>
@@ -75,7 +99,7 @@ export default function AddProperty() {
 
             <label htmlFor="">Select Type </label>
             <select
-              value={hoteltype}
+              value={type}
               style={{
                 width: "100%",
                 padding: "10px",
@@ -123,15 +147,34 @@ export default function AddProperty() {
               type="text"
               name=""
               onChange={(e) => setCheapest(e.target.value)}
-              value={cheapest}
-              placeholder="eg : Rs 1000.00"
+              value={cheapestPrice}
+              placeholder="eg : Rs 10000.00"
             />
           </div>
         </div>
         <div className="images">
+          
+        {images &&
+          images.map((image, index) => {
+            return (
+              <div key={image} className="image">
+                <img src={image} height="120" width="200" alt="upload" />
+              
+              </div>
+            );
+          })}
+
           <label>
-            <input type="file" style={{ display: "none" }} name="" id="" />
-            <FontAwesomeIcon icon={faUpload} /> Upload Image
+            <input
+              type="file"
+              style={{ display: "none" }}
+              name="images"
+              id=""
+              onChange={onSelectImage}
+              multiple
+              accept="image/png , image/jpeg , image/webp"
+            />
+            <FontAwesomeIcon icon={faUpload} /> Upload Images
           </label>
         </div>
         <center>

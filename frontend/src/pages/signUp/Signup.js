@@ -12,7 +12,6 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setCpassword] = useState("");
   const { signup, error, isLoading } = useSignup();
-  //const [type, setType] = useState("");
   const type = "user"
 
   const handleSubmit = async (e) => {
