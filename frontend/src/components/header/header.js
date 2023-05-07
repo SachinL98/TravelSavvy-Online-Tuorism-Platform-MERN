@@ -4,9 +4,11 @@ import {
   faBed,
   faCalendarDays,
   faCar,
+  faLandmark,
   faPeopleGroup,
   faPlane,
   faTaxi,
+  faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
 import { useContext, useState } from "react";
@@ -53,6 +55,10 @@ export default function Header({ type }) {
     navigate("/hotels", { state: { destination, date, options } });
   };
 
+  const registerClick = () =>{
+    navigate("/register");
+  }
+
 
   const { user } = useAuthContext();
 
@@ -69,12 +75,12 @@ export default function Header({ type }) {
             <span>Stays</span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
+            <FontAwesomeIcon icon={faLandmark} />
+            <span>Locations</span>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
+            <FontAwesomeIcon icon={faUmbrellaBeach} />
+            <span>Events</span>
           </div>
           <div className="headerListItem">
             <FontAwesomeIcon icon={faTaxi} />
@@ -88,7 +94,7 @@ export default function Header({ type }) {
               Save 10% or more at participating properties – just look for the
               blue Genius label.
             </p>
-            {!user && <button className="headerBtn">Sign in / Register</button>}
+            {!user && <button onClick={registerClick} className="headerBtn">Sign in / Register</button>}
 
             <div className="headerSearch">
               <div className="headerSearchItem">

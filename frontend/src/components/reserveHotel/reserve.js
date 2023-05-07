@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import Navbar from "../NavBar/navbar";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import "./reserve.css";
+import Swal from 'sweetalert2'
 
 export default function Reserve() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const id = location.pathname.split("/")[2];
 
@@ -37,7 +39,18 @@ export default function Reserve() {
 
   //console.log(selectedRooms)
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    Swal.fire({
+      title: 'Room Reservation Successful!',
+      text: 'Enjoy your vacation time',
+      imageUrl: 'https://cf.bstatic.com/static/img/communities/cover-photo/300x300/israel/8bbf21ad93d65e5a591016e6854698c11adbed15.jpg',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
+
+    navigate('/');
+  };
 
   return (
     <div>

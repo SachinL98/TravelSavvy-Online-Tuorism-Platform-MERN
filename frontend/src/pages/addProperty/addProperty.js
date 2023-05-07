@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import "./addProperty.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Swal from 'sweetalert2'
 
 export default function AddProperty() {
   const [name, setHotelName] = useState("");
@@ -18,6 +19,7 @@ export default function AddProperty() {
   const [type, setHoteType] = useState("");
   const [images, setSelectedImages] = useState([]);
   
+  const navigate = useNavigate();
 
   const handleDropdown = (event) => {
     setHoteType(event.target.value);
@@ -30,7 +32,20 @@ export default function AddProperty() {
     e.preventDefault();
 
     console.log(name, city, title, address, distance, desc, cheapestPrice,images,userID);
-    await addListing(name,type ,city, title, address, distance, desc, cheapestPrice,images,userID);
+
+    if((name == null || name == "") || (city == null || city == "") || (title == null|| title == "") || (address == null || address == "") ||  (desc == null|| desc == "") || (cheapestPrice == null||cheapestPrice == "") || (images == null || images == "")){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please Fill All Feilds',
+      })
+
+      return
+    }else{
+      await addListing(name,type ,city, title, address, distance, desc, cheapestPrice,images,userID);
+    }
+
+    
   };
 
   const onSelectImage = (event) => {
@@ -50,7 +65,19 @@ export default function AddProperty() {
             body:JSON.stringify({name,type ,city, title, address, distance, desc, cheapestPrice,images,userID})
         })
 
-        console.log(response)
+        console.log(response.status)
+
+        if(response.status == 200){
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          })
+
+          navigate('/property');
+        }
   }
 
   return (

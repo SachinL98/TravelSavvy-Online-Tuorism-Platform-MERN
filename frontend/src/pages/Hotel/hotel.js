@@ -85,7 +85,7 @@ const perDay = 1000*60*60*24
             {data.distance}
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over $114 at this proprtty and get a free airport taxi
+            Book a stay over {data.cheapestPrice} at this proprtty and get a free airport taxi
           </span>
           <div className="hotelImages">
             {photos.map((photo) => (

@@ -2,11 +2,18 @@ import "../NavBar/navbar.css";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBed, faHome, faHotel, faPeopleArrowsLeftRight, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faHotel, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useLogout } from "../../hooks/useLogout";
 
 export default function Navbar() {
 
   const { user } = useAuthContext();
+
+  const {logout} = useLogout()
+
+  const handleClick = ()=>{
+    logout()
+  }
 
   
 
@@ -25,6 +32,8 @@ export default function Navbar() {
             <FontAwesomeIcon icon={faHome} />
             <span className="listProperty">My Property</span>
           </Link>
+
+          <button className="navButton" onClick={handleClick}>Logout</button>
           </div>)  
           : user && user.user.type == "user" ? (
             (
@@ -33,6 +42,7 @@ export default function Navbar() {
             <FontAwesomeIcon icon={faUser} />
             <span className="listProperty"> {user.user.firstname}</span>
           </Link>
+          <button className="navButton" onClick={handleClick}>Logout</button>
           </div>
             
           )): <div className="navItems">
