@@ -135,7 +135,7 @@
 /* bu-accent */
 
 .bu-accent{
-    background-color: var(--clr-accent-500);
+    background-color: var(--clr-error-900);
     color: var(--clr-primary-neutral-000);
     border: none;
 

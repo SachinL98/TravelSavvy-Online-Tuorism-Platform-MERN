@@ -1,6 +1,7 @@
 
 
-import AVATAR from "../../assets/avatar.jpg";
+import AVATAR from "../../assets/avatar2.png";
+import AVATAR2 from "../../assets/avatar3.png";
 import { BuMinimal } from "../../Components/Buttons/Buttons";
 import getIcon from "../../Helpers/IconsHelper";
 
@@ -10,17 +11,17 @@ export default function ReviewsSection() {
     <div className="reviews p-6 grid gap-8 rounded-xl bg-white">
         <div className="flex gap-4">
             <p className="text-lg font-semibold text-dark">Reviews</p>
-            <p className="py-1 px-4 rounded-md bg-accent-500 text-white text-sm">31</p>
+            <p className="py-1 px-4 rounded-md bg-accent-500 text-white text-sm">2</p>
         </div>
-      <Review />
-      <Review />
-      <Review />
+      <Review1 />
+      <Review2 />
+      {/* <Review /> */}
      <BuMinimal text="show all" RightIcon={getIcon("chevron_down")} className="mt-4 py-1"/>
     </div>
   );
 }
 
-function Review() {
+function Review1() {
   return (
     <div className="flex gap-4">
       <img
@@ -31,22 +32,46 @@ function Review() {
       <div className="review__container flex flex-col gap-2 flex-1">
         <div className="review__header grid md:grid-cols-2 ">
           <p className="review__user text-lg font-bold text-dark -order-2 md:order-none">
-            Alex Stanton
+            Shehan Rashmika
           </p>
-          <p className="review__date md:text-end text-sm">15/09/2022</p>
-          <p className="review__user-occupation -order-1 md:order-none text-sm">CEO at GlobalCorp</p>
+          <p className="review__date md:text-end text-sm">29/06/23</p>
+          <p className="review__user-occupation -order-1 md:order-none text-sm">CEO at SOftmint</p>
           <ReviewStars className="md:ml-auto" />
         </div>
         <p className="review-text">
-          We are very happy with the service from the MORENT App. Morent has a
-          low price and also a large variety of cars with good and comfortable
-          facilities. In addition, the service provided by the officers is also
-          very friendly and very polite.
+        I am very pleased with the service. Extreamly good customer service
         </p>
       </div>
     </div>
   );
 }
+
+function Review2() {
+  return (
+    <div className="flex gap-4">
+      <img
+        src={AVATAR2}
+        alt=""
+        className="h-10 w-10 md:h-12 md:w-12 rounded-full"
+      />
+      <div className="review__container flex flex-col gap-2 flex-1">
+        <div className="review__header grid md:grid-cols-2 ">
+          <p className="review__user text-lg font-bold text-dark -order-2 md:order-none">
+          Supun Jayaweera
+          </p>
+          <p className="review__date md:text-end text-sm">1/07/23</p>
+          <p className="review__user-occupation -order-1 md:order-none text-sm">MD at Wiley</p>
+          <ReviewStars className="md:ml-auto" />
+        </div>
+        <p className="review-text">
+        Very good customer service
+        </p>
+      </div>
+    </div>
+  );
+}
+
+
 
 
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import NavigationBar from "../navbar";
 
 export default function EditTrain() {
   const { id } = useParams();
@@ -49,6 +50,8 @@ export default function EditTrain() {
       });
   }
   return (
+    <>
+      <NavigationBar/>
     <div style={{ marginLeft: "30%", marginTop: "20px" }}>
       <br></br>
       <h3>Edit {train.name} </h3>
@@ -186,5 +189,6 @@ export default function EditTrain() {
         </button>
       </div>
     </div>
+    </>
   );
 }

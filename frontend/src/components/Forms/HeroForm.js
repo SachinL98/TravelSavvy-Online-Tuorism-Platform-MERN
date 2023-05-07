@@ -8,7 +8,7 @@ export default function HeroForm(props) {
   const [formData, setFormData] = useState({
     selectedOption: {
       key: -1,
-      value: "eg. Sport",
+      value: "eg. Sedan",
     },
   });
   const setSelectedOption = (opt) => {
@@ -40,15 +40,15 @@ export default function HeroForm(props) {
           defaultOpt={formData.selectedOption}
         />
       </div>
-      <div className="flex flex-col gap-4 flex-1 w-full">
+      {/* <div className="flex flex-col gap-4 flex-1 w-full">
         <p className="text-dark font-semibold text-lg">Location</p>
         <input
           type="text"
           className=" rounded-lg px-2 py-3 border border-secondary-200 min-w-[16rem] w-full"
           placeholder="eg. 221B Baker Street"
         />
-      </div>
-      <BuAccent text="Search" className="py-3 px-6 rounded-lg flex-1"></BuAccent>
+      </div> */}
+      <BuAccent text="Search" className="py-3 px-6 rounded-lg flex-1" style={{ backgroundColor: 'red', color: 'white' }}></BuAccent>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import getIcon from "../../Helpers/IconsHelper";
 import { BuMinimal } from "../../Components/Buttons/Buttons";
 import "./Search.css";
 import { Footer, NavbarTop } from "../../Components/Navigation/Navigation";
+import NavigationBar from "../../Components/navbar";
 
 function CatalogueGrid() {
   return (
@@ -45,21 +46,21 @@ function SideBarFilter(props) {
     <div className="backdrop md:hidden w-full h-full bg-secondary-700 opacity-50" onClick={props.toggle}></div>
     <div className="filter bg-white w-full h-full p-4 flex flex-col gap-12 " >
       <FilterGroup title="TYPE">
-        <FilterCheckElement title="Sport" count={24}></FilterCheckElement>
-        <FilterCheckElement title="SUV" count={24}></FilterCheckElement>
-        <FilterCheckElement title="SEDAN" count={24}></FilterCheckElement>
-        <FilterCheckElement title="CUV" count={24}></FilterCheckElement>
-        <FilterCheckElement title="Hatchback" count={24}></FilterCheckElement>
-        <FilterCheckElement title="Micro" count={24}></FilterCheckElement>
-        <FilterCheckElement title="Roadster" count={24}></FilterCheckElement>
-        <FilterCheckElement title="Coupe" count={24}></FilterCheckElement>
+        <FilterCheckElement title="Sport" count={4}></FilterCheckElement>
+        <FilterCheckElement title="SUV" count={3}></FilterCheckElement>
+        <FilterCheckElement title="SEDAN" count={1}></FilterCheckElement>
+        <FilterCheckElement title="CUV" count={0}></FilterCheckElement>
+        <FilterCheckElement title="Hatchback" count={0}></FilterCheckElement>
+        <FilterCheckElement title="Micro" count={0}></FilterCheckElement>
+        <FilterCheckElement title="Roadster" count={0}></FilterCheckElement>
+        <FilterCheckElement title="Coupe" count={0}></FilterCheckElement>
       </FilterGroup>
 
       <FilterGroup title="SEATS">
-        <FilterCheckElement title="2 Persons" count={24}></FilterCheckElement>
-        <FilterCheckElement title="4 Persons" count={24}></FilterCheckElement>
-        <FilterCheckElement title="6 Persons" count={24}></FilterCheckElement>
-        <FilterCheckElement title="8 or more" count={24}></FilterCheckElement>
+        <FilterCheckElement title="2 Persons" count={4}></FilterCheckElement>
+        <FilterCheckElement title="4 Persons" count={4}></FilterCheckElement>
+        <FilterCheckElement title="6 Persons" count={0}></FilterCheckElement>
+        <FilterCheckElement title="8 or more" count={0}></FilterCheckElement>
       </FilterGroup>
       <FilterGroup title="PRICE">
         <RangeSlider 
@@ -83,7 +84,7 @@ export default function Search(props) {
     }
   return (
     <>
-    <NavbarTop></NavbarTop>
+   <NavigationBar/>
     
     <div className="page md:flex md:gap-4">
       <SideBarFilter className="" visible={""+sidebarVisible} toggle={()=>{toggleSidbar(sidebarVisible)}} LeftIcon={getIcon("funnel")}></SideBarFilter>
@@ -98,7 +99,7 @@ export default function Search(props) {
         <CatalogueGrid></CatalogueGrid>
       </section>
     </div>
-    <Footer></Footer>
+    {/* <Footer></Footer> */}
     </>
   );
 }

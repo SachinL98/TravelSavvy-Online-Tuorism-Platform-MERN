@@ -34,7 +34,7 @@ export default function HeroSection() {
     className="
     text-center hero-text max-w-2xl self-center row-start-2 
     md:text-start
-    lg:row-start-1 
+    lg:row-start-1 mt-10
     "
   >
     <h1
@@ -42,12 +42,11 @@ export default function HeroSection() {
       xl:text-6xl
       "
     >
-      Rent your Dream Car <br />
-      Around the World
+      Schedule Your Trains <br />
+      Without Hazzle
     </h1>
     <p className=" text-xl mt-4 leading-loose">
-      We provide the best car options, with premium customer services at a
-      competitive price
+      Your best companion to schedule all your train journies
     </p>
   </div>
   <img

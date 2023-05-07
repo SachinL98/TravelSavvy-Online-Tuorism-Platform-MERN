@@ -11,7 +11,7 @@ export function ScrollDisplay() {
   return (
     <section className="flex flex-col gap-4 ">
       <div className="flex flex-row justify-between">
-        <p className="text-light">Popular Cars</p>
+        <p className="text-dark fw-bold">Popular Cars</p>
         <a href="#" className="fw-semibold">
           View All
         </a>
@@ -32,7 +32,7 @@ export function ScrollDisplay() {
 export function GridDisplay() {
   return (
     <section className="flex flex-col gap-4 mt-6">
-      <p className="text-light">Recommended</p>
+      <p className="text-dark fw-bold">Recommended</p>
       <div className=" grid grid-cols-[repeat(auto-fit,_minmax(18rem,_1fr))] gap-6">
         {getCarArray(10).map((car, index) => (
           <CatalogueCard car={car} key={index} />

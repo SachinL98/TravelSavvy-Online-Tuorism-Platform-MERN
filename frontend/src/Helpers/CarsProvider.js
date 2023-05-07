@@ -5,23 +5,26 @@ import car_3 from "../assets/cars/car_3.png";
 import car_4 from "../assets/cars/car_4.png";
 import car_5 from "../assets/cars/car_5.png";
 import car_6 from "../assets/cars/car_6.png";
-
+import car_7 from "../assets/cars/car_7.png";
+import car_8 from "../assets/cars/car_8.png";
+import car_11 from "../assets/cars/car_11.png";
+import car_10 from "../assets/cars/car_10.png";
 const cars = [
     {
-        name :  "Koenigsegg",
+        name :  "Honda Civic",
         type : "Sport",
-        image : car_0,
+        image : car_7,
         isFavorite : true,
         price : 99.00,
         oldPrice : -1,
-        seats : 2,
+        seats : 4,
         transition : "Automatic",
         fuel : 90,
       },
       {
-        name :  "Nossan GT-R",
+        name :  "Toyota Axio",
         type : "Sport",
-        image : car_1,
+        image : car_8,
         isFavorite : false,
         price : 80.00,
         oldPrice : 100.00,
@@ -30,7 +33,7 @@ const cars = [
         fuel : 80,
       },
       {
-        name :  "Rolls-Roys",
+        name :  "Honda CRV",
         type : "Sedan",
         image : car_3,
         isFavorite : true,
@@ -41,9 +44,9 @@ const cars = [
         fuel : 70,
       },
       {
-        name :  "All New Rush",
+        name :  "KIA Sporatge",
         type : "SUV",
-        image : car_4,
+        image : car_10,
         isFavorite : false,
         price : 72.00,
         oldPrice : 80.00,

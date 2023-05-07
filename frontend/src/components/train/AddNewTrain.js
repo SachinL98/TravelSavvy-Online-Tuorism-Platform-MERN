@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import NavigationBar from "../navbar";
 // import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function AddNewTrain() {
@@ -46,6 +47,7 @@ export default function AddNewTrain() {
 
   return (
     <div>
+      <NavigationBar/>
       <form style={{ marginLeft: "30%", marginTop: "20px" }}>
         <br />
         <div className="row md-6">
@@ -65,7 +67,7 @@ export default function AddNewTrain() {
         <div className="row md-6">
           <div className="col-md-6">
             <label className="labels" style={{ float: "left" }}>
-              Enter Cream Name :
+              Enter Train Name :
             </label>
             <input
               type="text"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import NavigationBar from "../navbar";
 
 export default function OneTrain() {
   const { id } = useParams();
@@ -21,6 +22,8 @@ export default function OneTrain() {
   }, []);
 
   return (
+    <>
+      <NavigationBar/>
     <div className="container" style={{ marginTop: "6%", maxWidth: "50%", display: "flex", flexDirection: "column", alignItems: "center"  }}>
       <div className="card">
         <img
@@ -56,6 +59,7 @@ export default function OneTrain() {
       </div>
       <Link to={`/allTrains`} className="btn btn-info btn-lg" style={{ marginTop: "20px" }}>Back</Link>
     </div>
+    </>
   );
   
   

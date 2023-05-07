@@ -9,6 +9,7 @@ import useDraggableScroll from "use-draggable-scroll";
 import HeroForm from "../../Components/Forms/HeroForm";
 import { Footer, NavbarTop } from "../../Components/Navigation/Navigation";
 import { GridDisplay, ScrollDisplay } from "../CarDisplayViews";
+import NavigationBar from "../../Components/navbar";
 
 function HeroSection() {
   return (
@@ -32,11 +33,10 @@ function HeroSection() {
           "
         >
           Rent your Dream Car <br />
-          Around the World
+          At your fingertips
         </h1>
         <p className=" text-xl mt-4 leading-loose">
-          We provide the best car options, with premium customer services at a
-          competitive price
+        Whether you're looking for luxury or efficiency, our car options cater to your needs, ensuring a seamless and enjoyable experience from start to finish
         </p>
       </div>
       <img
@@ -61,14 +61,15 @@ export default function Home() {
   const { onMouseDown } = useDraggableScroll(ref);
   return (
     <>
-      <NavbarTop></NavbarTop>
+      {/* <NavbarTop></NavbarTop> */}
+      <NavigationBar/>
       <div className="page py-5 px-4 md:py-8 md:px-16">
         <HeroSection></HeroSection>
 
         <ScrollDisplay/>
         <GridDisplay/>
       </div>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }

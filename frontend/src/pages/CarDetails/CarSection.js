@@ -1,6 +1,6 @@
-import NissanGTR from "../../assets/cars/gtr/2020_Nissan_GT-R_22.jpg";
-import NissanGTR_dash from "../../assets/cars/gtr/2021_nissan_gt_r_dashboard.jpg";
-import NissanGTR_front from "../../assets/cars/gtr/2021_nissan_gt_r_frontseat.jpg";
+import NissanGTR from "../../assets/cars/gtr/civic1.jpg";
+import NissanGTR_dash from "../../assets/cars/gtr/civic2.jpg";
+import NissanGTR_front from "../../assets/cars/gtr/civic3.jpg";
 import { useState } from "react";
 import { BuAccent } from "../../Components/Buttons/Buttons";
 
@@ -26,31 +26,33 @@ function CarDetails() {
   return (
     <div className="car__details p-6 rounded-2xl flex flex-col bg-white  md:mr-auto drop-shadow-md">
       <h2 className=" font-bold text-dark lg:text-3xl text-2xl">
-        Nissan GT-R 2021
+        Honda Civic 2023
       </h2>
       <div className="car__rating flex flex-wrap gap-2 items-center mt-2">
         <ReviewStars></ReviewStars>
-        <p className="text-sm text-secondary-300">+440 Reviews</p>
+        <p className="text-sm text-secondary-300">+20 Reviews</p>
       </div>
       <p className="car__description tex-lg lg:mt-8 mt-4 leading-loose">
-        Nissan challenged convention at every point of the Nissan GT-R’s
-        development. Instead of a large, heavy engine thirsty for fuel, the now
-        sold out Nissan GT-R is powered by an ideally sized, twin-turbocharged
-        3.8-L V6 that produces a prodigious 565 hp and equally immense 467 lb-ft
-        of torque.
+        Honda redefined expectations throughout the development of the Honda
+        Civic 2023. The highly sought-after Honda Civic
+        2023 is equipped with an optimally sized and power-packed engine. The
+        Civic is powered by a responsive and efficient 1.5-Liter turbocharged
+        engine, delivering an impressive 180 horsepower and a substantial 177
+        lb-ft of torque. This winning combination ensures an exhilarating
+        driving experience while maintaining exceptional fuel economy.
       </p>
       <div className="car__specs grid l xl:grid-cols-1 grid-cols-1  gap-x-8 md:gap-y-4 gap-y-4 lg:mt-auto my-4">
         <SpecGroup name="Car Type" value="Sport"></SpecGroup>
-        <SpecGroup name="Capacity" value="2Persons"></SpecGroup>
+        <SpecGroup name="Capacity" value="4Persons"></SpecGroup>
         <SpecGroup name="Transimission" value="Auto"></SpecGroup>
-        <SpecGroup name="Gas" value="70L"></SpecGroup>
+        <SpecGroup name="Gas" value="90L"></SpecGroup>
       </div>
 
       <div className="car__actions mt-auto">
         <div className="flex md:flex-row flex-col justify-between md:items-end lg:gap-6 gap-4">
           <div className="flex-1">
             <p className="text-almost-black fw-bold fs-xl">
-              $80.00 /<span className="fs-sm text-light fw-base">day</span>
+              $99.00 /<span className="fs-sm text-light fw-base">day</span>
             </p>
 
             <p className="fw-bold fs-regular text-linethrough text-light">

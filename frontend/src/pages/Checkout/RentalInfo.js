@@ -3,8 +3,8 @@ import DropDown from "../../Components/FormControls/DropDown";
 
 export default function RentalInfo({ className, callBack }) {
   const LOCATIONS = [
-    { key: 0, value: "Sport" },
-    { key: 1, value: "SUV" },
+    { key: 0, value: "Galle" },
+    { key: 1, value: "Matara" },
     { key: 2, value: "SEDAN" },
     { key: 3, value: "CUV" },
     { key: 4, value: "MICRO" },

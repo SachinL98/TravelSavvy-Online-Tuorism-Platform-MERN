@@ -17,6 +17,7 @@ import Home from "./Pages/Home/Home";
 import Search from "./Pages/Search/Search";
 import Car from "./Pages/CarDetails/Car";
 import Checkout from "./Pages/Checkout/Checkout";
+import ReservationSuccessful from "./Components/reservationSuccess";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="car" element={<Car />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="reservationSucccess" element={<ReservationSuccessful />} />
         </Routes>
       </BrowserRouter>
     </div>

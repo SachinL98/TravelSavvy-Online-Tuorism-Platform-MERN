@@ -1,23 +1,7 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display:swap');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
 :root{
   /* color system */
   --clr-light-gray : #f6f7f9;
@@ -59,7 +43,7 @@ code {
   --clr-success-200 : #E8FAA6;
   --clr-success-100 : #F5FCD2;
       /* error */
-  --clr-error-900 : #7A0619;
+  --clr-error-900 : #ad006b;
   --clr-error-800 : #930B16;
   --clr-error-700 : #B71112;
   --clr-error-600 : #DB2719;
@@ -320,5 +304,4 @@ a:hover,a:visited{
 .fs-5xl{
   font-size: var(--f-40);
 }
-
 

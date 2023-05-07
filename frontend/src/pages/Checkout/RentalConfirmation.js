@@ -15,7 +15,7 @@ export default function RentalConfirmation({ className, callBack }) {
       <div className="flex items-center bg-gray-100 font-semibold p-3 rounded-md text-sm md:text-base gap-3">
         <CheckBox />
         <p>
-          I agree with Morent{" "}
+          I agree with TravelSavvy{" "}
           <span className="underline font-bold">Terms and Conditions</span> and {" "}
           <span className="underline font-bold">Privacy Policy</span>
         </p>

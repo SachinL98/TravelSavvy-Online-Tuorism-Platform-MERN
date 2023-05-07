@@ -18,11 +18,11 @@ export default function RentalSummary(props) {
           lg:row-span-2 self-center p-2"
       />
       <h2 className=" font-bold text-dark text-lg lg:col-span-2 col-span-3 self-end">
-        Nissan GT-R 2021
+        Toyota Axio
       </h2>
       <div className="car__rating flex flex-wrap gap-2 items-center lg:col-span-2 col-span-3 self-start">
         <ReviewStars></ReviewStars>
-        <p className="text-sm text-secondary-300">+440 Reviews</p>
+        <p className="text-sm text-secondary-300">+30 Reviews</p>
       </div>
       <span className="col-span-3 border border-gray-100 my-4 mt-8"></span>
       <PriceRow name="Price Per Day" value={`${props.car.price}$`} />

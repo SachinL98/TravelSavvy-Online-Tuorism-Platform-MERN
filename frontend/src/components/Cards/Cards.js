@@ -22,7 +22,7 @@ export function CatalogueCard(props) {
       <div className="flex flex-row justify-between items-start">
         <div>
           <p className="text-almost-black fw-bold fs-xl">{name}</p>
-          <p className="fw-bold fs-sm text-light">{type}</p>
+          <p className="fw-bold fs-sm text-dark">{type}</p>
         </div>
         <BuMinimal
           className="bu-square "
@@ -35,15 +35,15 @@ export function CatalogueCard(props) {
         <div className="catalogue-card__specs flex flex-row gap-4 justify-between text-light">
           <div className="spec-group flex flex-row gap-2 items-end">
             <FuelIcon />
-            <p className="fs-sm fw-medium ">{fuel}L</p>
+            <p className="fs-sm fw-medium text-dark ">{fuel}L</p>
           </div>
           <div className="spec-group flex flex-row gap-2 items-end">
             <TransitionIcon />
-            <p className="fs-sm fw-medium ">{transition}</p>
+            <p className="fs-sm fw-bold text-dark ">{transition}</p>
           </div>
           <div className="spec-group flex flex-row gap-2 items-end">
             <PersonsIcon />
-            <p className="fs-sm fw-medium ">{seats}People</p>
+            <p className="fs-sm fw-medium text-dark">{seats}People</p>
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@ export function CatalogueCard(props) {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
-            /<span className="fs-sm text-light fw-base">day</span>
+            /<span className="fs-sm text-dark fw-base">day</span>
           </p>
           {oldPrice>0 && (
             <p className="fw-bold fs-regular text-linethrough text-light">
