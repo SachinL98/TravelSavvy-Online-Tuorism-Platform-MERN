@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import HeroSection from "./HeroTrain";
 //import ImageView from "../ImageView";
 
 export default function AllTrains() {
@@ -56,148 +57,49 @@ export default function AllTrains() {
     setDeleted(false);
   }, [deleted]);
 
-  //   return (
-  //     <div>
-  //       <br></br>
-  //       <h2
-  //         style={{
-  //           textAlign: "center",
-  //           display: "inline-block",
-  //           marginLeft: "45%",
-  //         }}
-  //       >
-  //         Trains
-  //       </h2>
-  //       <Link to={`/addNewTrain`}>
-  //         <button
-  //           className="btn btn-success"
-  //           style={{
-  //             display: "inline-block",
-  //             float: "right",
-  //             marginRight: "10px",
-  //           }}
-  //         >
-  //           AddNewTrain
-  //         </button>{" "}
-  //       </Link>
-  //       <hr></hr>
-  //       <div>
-  //         {train.map((trainData) => (
-  //           <div
-  //             className="card"
-  //             style={{ display: "inline-flex", margin: "20px" }}
-  //             key={trainData._id}
-  //           >
-  //             <div className="card-img-top">
-  //               <img src={trainData.imageUrl} style={{ width: "200px" }} />
-  //             </div>
-  //             <div className="card-body">
-  //               <h5 className="card-title">{trainData.name}</h5>
-  //               <p className="card-text">{trainData.description}</p>
-  //               {/* <Link to={`/oneTrain/${trainData._id}`}>
-  //                 <button className="btn btn-info btn-sm">See Details</button>{" "}
-  //               </Link> */}
-  //               {/* {(user.user.type == "seller" || user.user.type == "admin") && (
-  //                 <Link to={`/editTrain/${trainData._id}`}>
-  //                   <button className="btn btn-warning btn-sm">Edit</button>
-  //                 </Link>
-  //               )} */}
-  //               {/* {(user.user.type == "seller" || user.user.type == "admin") && (
-  //                 <button
-  //                   style={{ marginLeft: "5px" }}
-  //                   onClick={() => deleteTrain(trainData._id)}
-  //                   className="btn btn-danger btn-sm"
-  //                 >
-  //                   Delete
-  //                 </button>
-  //               )} */}
 
-  //                <button
-  //                   style={{ marginLeft: "5px" }}
-  //                   onClick={() => deleteTrain(trainData._id)}
-  //                   className="btn btn-danger btn-sm"
-  //                 >
-  //                   Delete
-  //                 </button>
-
-  //               {/* {user.user.type == "buyer" && (
-  //                 <button
-  //                   onClick={() => addToCart(creamData)}
-  //                   className="btn btn-success btn-sm"
-  //                 >
-  //                   Add To Cart
-  //                 </button>
-  //               )} */}
-  //             </div>
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-
-  return (
+return (
     <div>
       <br />
-      <h2
-        style={{
-          textAlign: "center",
-          marginLeft: "auto",
-          marginRight: "auto",
-          width: "fit-content",
-          fontSize: '40px',
-          fontWeight: "bold",
-        }}
-      >
-        Trains
+      <h2 className="display-4 fw-bold mb-4" style={{
+        textAlign: "center",
+        marginLeft: "auto",
+        marginRight: "auto",
+        width: "fit-content",
+        fontSize: "80px",
+        fontWeight: "bold"
+      }}>
+        Train Schedules
       </h2>
+      <HeroSection/>
+      <div className="d-flex justify-content-center mt-4 mb-4">
       <Link to="/addNewTrain">
-        <button
-          className="btn btn-success"
-          style={{ float: "right", marginRight: "10px" }}
-        >
+        <button className="btn btn-success btn-lg" style={{ float: "right", marginRight: "10px" }}>
           Add New Train
         </button>
       </Link>
+      </div>
       <hr />
-      <div
-        style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
-      >
+      <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
         {train.map((trainData) => (
-          <div
-            className="card"
-            style={{ margin: "20px", width: "300px" }}
-            key={trainData._id}
-          >
+          <div className="card" style={{
+            margin: "20px",
+            width: "400px",
+            border: "1px solid #ddd",
+            borderRadius: "10px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            overflow: "hidden"
+          }} key={trainData._id}>
             <div className="card-img-top">
-              <img
-                src={trainData.imageLink}
-                style={{ width: "100%", height: "200px", objectFit: "cover" }}
-                alt="Train"
-              />
+              <img src={trainData.imageLink} style={{ width: "100%", height: "200px", objectFit: "cover" }} alt="Train" />
             </div>
             <div className="card-body">
-              <h5 className="card-title">{trainData.name}</h5>
-              <p className="card-text">{trainData.description}</p>
+              <h5 className="card-title" style={{ fontSize: "24px", marginBottom: "10px" }}>{trainData.name}</h5>
+              <p className="card-text" style={{ fontSize: "16px", marginBottom: "20px" }}>{trainData.description}</p>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                {/* <Link to={`/oneTrain/${trainData._id}`} className="btn btn-info btn-sm">See Details</Link>
-                {(user.user.type === "seller" || user.user.type === "admin") && (
-                  <Link to={`/editTrain/${trainData._id}`} className="btn btn-warning btn-sm">Edit</Link>
-                )} */}
-
-                <button
-                  style={{ marginLeft: "5px" }}
-                  onClick={() => deleteTrain(trainData._id)}
-                  className="btn btn-danger btn-sm"
-                >
-                  Delete
-                </button>
-
-                {/* {(user.user.type === "seller" || user.user.type === "admin") && (
-                  <button onClick={() => deleteTrain(trainData._id)} className="btn btn-danger btn-sm">Delete</button>
-                )} */}
-                {/* {user.user.type === "buyer" && (
-                  <button onClick={() => addToCart(creamData)} className="btn btn-success btn-sm">Add To Cart</button>
-                )} */}
+                <Link to={`/oneTrain/${trainData._id}`} className="btn btn-info btn-sm">See Details</Link>
+                <Link to={`/editTrain/${trainData._id}`} className="btn btn-warning btn-sm">Edit</Link>
+                <button onClick={() => deleteTrain(trainData._id)} className="btn btn-danger btn-sm">Delete</button>
               </div>
             </div>
           </div>
@@ -205,4 +107,5 @@ export default function AllTrains() {
       </div>
     </div>
   );
+  
 }
