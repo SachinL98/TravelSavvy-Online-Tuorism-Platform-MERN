@@ -72,6 +72,24 @@ router.route('/get/:id').get((req, res)=>{
     })
 });
 
+
+//Get events by type
+router.route('/getType/:type').get((req, res)=>{
+    const {type} = req.params;
+
+    Event.find({type: type})
+    .then((events)=>{
+        if(events)
+            res.status(200).json(events);
+        else
+            res.status(400).send('No events !');
+    })
+    .catch((err)=>{
+        res.status(500).send('Server Error');
+        console.log(err);
+    })
+});
+
 //Update Event
 
 

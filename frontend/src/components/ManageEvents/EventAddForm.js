@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import storage from "../../firebase/firebaseConfig.js"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import './events.css';
+import Swal from "sweetalert2";
 
 export default function AddNewEvent() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -69,7 +70,13 @@ export default function AddNewEvent() {
 
     axios.post('http://localhost:8000/api/event/add', newEvent)
     .then(()=>{
-      window.alert('New Event Added');
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'New Event Added !',
+        showConfirmButton: false,
+        timer: 1500
+      })
       navigate('/events');
     })
     .catch((err)=>{

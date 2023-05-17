@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useAsyncError } from 'react-router-dom'
 
 export default function eventPageHeader() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -23,8 +23,6 @@ export default function eventPageHeader() {
                  <Link to='/wishList'><button type="button" class="btn btn-success" style={{backgroundColor: "#ad006b", borderStyle: "none"}}>Whishlist 💟</button></Link> 
               </div>
             )}
-            
-           
         </div>
     </div>
   )

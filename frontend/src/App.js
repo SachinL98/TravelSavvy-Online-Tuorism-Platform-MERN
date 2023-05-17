@@ -13,6 +13,7 @@ import UpdateEvent from "./pages/Events/UpdateEvent.js";
 import UserEvents from "./pages/Events/UserEvents";
 import WishList from "./pages/Events/WishList";
 import OneEvent from "./pages/Events/OneEvent";
+import OneType from "./components/eventList/OneType";
 
 import Login from "./pages/Auth/login";
 import Signup from "./pages/Auth/signup";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/manageEvent" element={<UserEvents/>} />
         <Route path="/wishList" element={<WishList/>} />
         <Route path="/oneEvent/:id" element={<OneEvent/>} />
+        <Route path="/oneType/:type" element={<OneType/>} />
       </Routes>
     </BrowserRouter>
   );

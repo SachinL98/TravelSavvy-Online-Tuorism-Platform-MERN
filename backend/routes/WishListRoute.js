@@ -28,7 +28,7 @@ router.route('/get/:id').get((req, res)=>{
 
     WishList.find({userID: id})
     .then((events)=>{
-        if(events)
+        if(events != [])
             res.status(200).json(events);
         else
             res.status(400).send('No events !');
@@ -38,5 +38,19 @@ router.route('/get/:id').get((req, res)=>{
         console.log(err);
     })
 });
+
+//Romove WishList Item
+router.route('/delete').delete((req, res)=>{
+    const {id} = req.params;
+
+    WishList.findByIdAndDelete(id)
+    .then((res)=>{
+        console.log(res);
+        res.status(200).send('Item Deleted !')
+    })
+    .catch((err)=>{
+        res.status(500).send('Server Error');
+    })
+})
 
 module.exports = router;
