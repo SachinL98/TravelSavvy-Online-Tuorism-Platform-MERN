@@ -21,6 +21,9 @@ connection.once("open", () => {
 const trainRouter = require("./routes/TrainRoute");
 app.use("/train", trainRouter);
 
+const carRouter = require("./routes/CarRoute");
+app.use("/car", carRouter);
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
