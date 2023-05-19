@@ -77,6 +77,7 @@ export function CatalogueCard(props) {
           text="Rent Now"
         />
         </Link>
+
       </div>
     </div>
   );

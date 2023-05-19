@@ -48,6 +48,16 @@ export function ScrollDisplay() {
 
   return (
     <section className="flex flex-col gap-4 ">
+      <div className="d-flex justify-content-center mt-4 mb-4">
+        <Link to="/addNewCar">
+          <button
+            className="btn btn-success btn-lg"
+            style={{ float: "right", marginRight: "10px" }}
+          >
+            Add New Car
+          </button>
+        </Link>
+      </div>
       <div className="flex flex-row justify-between">
         <p className="text-dark fw-bold">Popular Cars</p>
         <a href="#" className="fw-semibold">
