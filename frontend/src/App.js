@@ -31,8 +31,8 @@ function App() {
           <Route path="/oneTrain/:id" element={<OneTrain />} />
 
           <Route path="/carHome" element={<Home />} />
-          <Route path="search" element={<Search />} />
-          <Route path="car" element={<Car />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/oneCar/:id" element={<Car />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="reservationSucccess" element={<ReservationSuccessful />} />
         </Routes>

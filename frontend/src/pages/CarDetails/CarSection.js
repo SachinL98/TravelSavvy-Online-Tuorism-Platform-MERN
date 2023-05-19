@@ -1,14 +1,17 @@
 import NissanGTR from "../../assets/cars/gtr/civic1.jpg";
 import NissanGTR_dash from "../../assets/cars/gtr/civic2.jpg";
 import NissanGTR_front from "../../assets/cars/gtr/civic3.jpg";
-import { useState } from "react";
+import React, {useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import { BuAccent } from "../../Components/Buttons/Buttons";
+
 
 export default function CarSection() {
   return (
     <div className="car grid md:grid-cols-2 md:grid-rows-1 grid-rows-[auto_auto] grid-cols-1 gap-6 justify-items-center">
-      <CarPictures></CarPictures>
-      <CarDetails></CarDetails>
+      <CarPictures/>
+      <CarDetails/>
     </div>
   );
 }
@@ -23,10 +26,29 @@ function SpecGroup(props) {
 }
 
 function CarDetails() {
+
+  const { id } = useParams();
+  const [car, setCar] = useState([]);
+
+  useEffect(() => {
+    function getOneCar() {
+      axios
+        .get(`http://localhost:8000/car/getOneCar/${id}`)
+        .then((res) => {
+          setCar(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    getOneCar();
+  }, []);
+
   return (
     <div className="car__details p-6 rounded-2xl flex flex-col bg-white  md:mr-auto drop-shadow-md">
       <h2 className=" font-bold text-dark lg:text-3xl text-2xl">
-        Honda Civic 2023
+        {/* Honda Civic 2023 */}
+        {car.name}
       </h2>
       <div className="car__rating flex flex-wrap gap-2 items-center mt-2">
         <ReviewStars></ReviewStars>
@@ -42,27 +64,31 @@ function CarDetails() {
         driving experience while maintaining exceptional fuel economy.
       </p>
       <div className="car__specs grid l xl:grid-cols-1 grid-cols-1  gap-x-8 md:gap-y-4 gap-y-4 lg:mt-auto my-4">
-        <SpecGroup name="Car Type" value="Sport"></SpecGroup>
-        <SpecGroup name="Capacity" value="4Persons"></SpecGroup>
-        <SpecGroup name="Transimission" value="Auto"></SpecGroup>
-        <SpecGroup name="Gas" value="90L"></SpecGroup>
+        <SpecGroup name="Car Type" value={car.type}></SpecGroup>
+        <SpecGroup name="Capacity" value={car.seats}></SpecGroup>
+        <SpecGroup name="Transimission" value={car.transition}></SpecGroup>
+        <SpecGroup name="Gas" value={car.fuel}></SpecGroup>
       </div>
 
       <div className="car__actions mt-auto">
         <div className="flex md:flex-row flex-col justify-between md:items-end lg:gap-6 gap-4">
           <div className="flex-1">
             <p className="text-almost-black fw-bold fs-xl">
-              $99.00 /<span className="fs-sm text-light fw-base">day</span>
+              ${car.price} /<span className="fs-sm text-dark fw-base">day</span>
             </p>
 
             <p className="fw-bold fs-regular text-linethrough text-light">
               $90.00
             </p>
           </div>
+          <Link
+           to={`/checkout`}
+         >
           <BuAccent
             className=" bu-med fw-base flex-1 rounded-sm py-8"
             text="Rent Now"
           />
+          </Link>
         </div>
       </div>
     </div>
@@ -70,6 +96,24 @@ function CarDetails() {
 }
 
 function CarPictures() {
+
+  const { id } = useParams();
+  const [car, setCar] = useState([]);
+
+  useEffect(() => {
+    function getOneCar() {
+      axios
+        .get(`http://localhost:8000/car/getOneCar/${id}`)
+        .then((res) => {
+          setCar(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    getOneCar();
+  }, []);
+
   const [activePic, setActivePic] = useState(0);
   const CARPICS = [NissanGTR, NissanGTR_dash, NissanGTR_front];
   const ActiveBorder = (index) => {
@@ -79,25 +123,25 @@ function CarPictures() {
     <div className="car__pictures grid grid-cols-3 gap-4 grid-rows-4  self-start md:ml-auto">
       <img
         className="block m-auto col-span-3 row-span-3 rounded-2xl border border-secondary-200"
-        src={CARPICS[activePic]}
+        src={car.image1}
       ></img>
       <img
         className={"rounded-2xl" + ActiveBorder(0)}
-        src={CARPICS[0]}
+        src={car.image1}
         onClick={() => {
           setActivePic(0);
         }}
       ></img>
       <img
         className={"rounded-2xl" + ActiveBorder(1)}
-        src={CARPICS[1]}
+        src={car.image2}
         onClick={() => {
           setActivePic(1);
         }}
       ></img>
       <img
         className={"rounded-2xl" + ActiveBorder(2)}
-        src={CARPICS[2]}
+        src={car.image3}
         onClick={() => {
           setActivePic(2);
         }}

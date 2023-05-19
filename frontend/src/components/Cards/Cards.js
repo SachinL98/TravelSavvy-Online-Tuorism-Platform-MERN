@@ -1,6 +1,7 @@
 import getIcon from "../../Helpers/IconsHelper";
 import { BuAccent, BuMinimal } from "../Buttons/Buttons";
 import "./Cards.css";
+import { Link } from "react-router-dom";
 
 export function CatalogueCard(props) {
   const {
@@ -68,10 +69,14 @@ export function CatalogueCard(props) {
             </p>
           )}
         </div>
+        <Link
+           to={`/checkout`}
+         >
         <BuAccent
           className=" bu-med fw-base flex-1 rounded-sm py-8"
           text="Rent Now"
         />
+        </Link>
       </div>
     </div>
   );

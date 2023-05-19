@@ -16,6 +16,9 @@ router.route("/addCar").post(upload.single("image"), async (req, res) => {
     seats,
     transition,
     fuel,
+    image1,
+    image2,
+    image3
   } = req.body;
 
   try {
@@ -30,6 +33,9 @@ router.route("/addCar").post(upload.single("image"), async (req, res) => {
       seats,
       transition,
       fuel,
+      image1,
+    image2,
+    image3
     });
     const result = await car.save();
 
@@ -77,6 +83,9 @@ router.route("/updateCar/:id").put(async (req, res) => {
     seats,
     transition,
     fuel,
+    image1,
+    image2,
+    image3
   } = req.body;
   let updatedCar = {
     name,
@@ -88,6 +97,9 @@ router.route("/updateCar/:id").put(async (req, res) => {
     seats,
     transition,
     fuel,
+    image1,
+    image2,
+    image3
   };
   await Car.findByIdAndUpdate(id, updatedCar)
     .then(() => {

@@ -2,6 +2,7 @@ import "./HeroForm.css";
 import { useState } from "react";
 import { BuAccent, BuMinimal, BuSecondary } from "../Buttons/Buttons";
 import getIcon from "../../Helpers/IconsHelper";
+import { Link } from "react-router-dom";
 
 //todo: write cleaner code
 export default function HeroForm(props) {
@@ -48,7 +49,12 @@ export default function HeroForm(props) {
           placeholder="eg. 221B Baker Street"
         />
       </div> */}
-      <BuAccent text="Search" className="py-3 px-6 rounded-lg flex-1" style={{ backgroundColor: 'red', color: 'white' }}></BuAccent>
+       <Link
+           to={`/search`}
+         >
+
+      <BuAccent text="Search" className="py-3 px-6 rounded-lg flex-1" style={{ backgroundColor: 'red', color: 'white' }}/>
+         </Link>
     </div>
   );
 }

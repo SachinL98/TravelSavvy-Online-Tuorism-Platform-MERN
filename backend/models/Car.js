@@ -11,6 +11,9 @@ const carSchema = new Schema({
   seats: { type: Number, required: true },
   transition: { type: String, required: true },
   fuel: { type: Number, required: true },
+  image1: { type: String },
+  image2: { type: String },
+  image3: { type: String },
 });
 
 const Car = mongoose.model("Car", carSchema);

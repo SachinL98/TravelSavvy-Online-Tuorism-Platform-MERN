@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React,{ useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { CatalogueCard } from "../../Components/Cards/Cards";
 import CheckBox from "../../Components/FormControls/CheckBox";
 import RangeSlider from "../../Components/FormControls/RangeSlider";
@@ -9,20 +11,98 @@ import "./Search.css";
 import { Footer, NavbarTop } from "../../Components/Navigation/Navigation";
 import NavigationBar from "../../Components/navbar";
 
-function CatalogueGrid() {
+function CatalogueGrid({ selectedFilters }) {
+  
+  const [car, setCar] = useState([]);
+  const [deleted, setDeleted] = useState(false);
+
+  const filteredCars = selectedFilters.length > 0 ? car.filter(car => {
+    // Apply filtering based on selected filters
+    const hasTypeFilter = selectedFilters.includes(car.type);
+  const hasSeatFilter = selectedFilters.includes(car.seats.toString());
+
+  // const priceRange = [0, 100000]; // Replace minPrice and maxPrice with your actual values
+  // const carPrice = car.price; // Replace price with your actual property name
+  // const isPriceInRange = carPrice >= priceRange[0] && carPrice <= priceRange[1];
+
+    // For example, if you have a "type" filter
+    return hasTypeFilter || hasSeatFilter ;
+  }): car;
+
+  function deleteCar(id) {
+    const ans = window.confirm("Are you sure ?");
+    if (ans) {
+      axios
+        .delete(`http://localhost:8000/car/deleteCar/${id}`)
+        .then((res) => {
+          window.alert("Car Deleted !");
+          setDeleted(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  useEffect(() => {
+    function getAllCars() {
+      axios
+        .get("http://localhost:8000/car/getCar")
+        .then((res) => {
+          setCar(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    getAllCars();
+    setDeleted(false);
+  }, [deleted]);
+
   return (
     <div className="grid grid-cols-[repeat(auto-fit,_minmax(20rem,_1fr))] gap-8 gap-y-16 justify-items-center items-center">
-      {getCarArray(10).map((car, index) => (
-        <CatalogueCard car={car} key={index} />
-      ))}
+      {filteredCars.map((car, index) => (
+           <Link
+           to={`/oneCar/${car._id}`}
+           style={{textDecoration: 'none'}}
+         >
+           <CatalogueCard car={car} key={index} />
+          
+         </Link>
+        ))}
     </div>
   );
 }
 
 function FilterCheckElement(props) {
+
+  const [checked, setChecked] = useState(false);
+
+  // const handleFilterSelection = () => {
+  //   // Toggle the filter selection
+  //   if (props.selectedFilters.includes(props.title)) {
+  //     props.setSelectedFilters(prevFilters => prevFilters.filter(filter => filter !== props.title));
+  //   } else {
+  //     props.setSelectedFilters(prevFilters => [...prevFilters, props.title]);
+  //   }
+  // };
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+    if (!checked) {
+      props.setSelectedFilters((prevFilters) => [...prevFilters, props.title]);
+    } else {
+      props.setSelectedFilters((prevFilters) =>
+        prevFilters.filter((filter) => filter !== props.title)
+      );
+    }
+  };
+
   return (
-    <div className="flex gap-4 font-semibold">
-      <CheckBox></CheckBox>
+    // <div className="flex gap-4 font-semibold" onClick={handleFilterSelection}>
+      <div className="flex gap-4 font-semibold">
+      {/* <CheckBox></CheckBox> */}
+      <input type="checkbox" checked={checked} onChange={handleCheckboxChange} />
       <p className="">{props.title}</p>
       <p className="text-secondary-300">({props.count})</p>
     </div>
@@ -46,28 +126,28 @@ function SideBarFilter(props) {
     <div className="backdrop md:hidden w-full h-full bg-secondary-700 opacity-50" onClick={props.toggle}></div>
     <div className="filter bg-white w-full h-full p-4 flex flex-col gap-12 " >
       <FilterGroup title="TYPE">
-        <FilterCheckElement title="Sport" count={4}></FilterCheckElement>
-        <FilterCheckElement title="SUV" count={3}></FilterCheckElement>
-        <FilterCheckElement title="SEDAN" count={1}></FilterCheckElement>
-        <FilterCheckElement title="CUV" count={0}></FilterCheckElement>
-        <FilterCheckElement title="Hatchback" count={0}></FilterCheckElement>
-        <FilterCheckElement title="Micro" count={0}></FilterCheckElement>
-        <FilterCheckElement title="Roadster" count={0}></FilterCheckElement>
-        <FilterCheckElement title="Coupe" count={0}></FilterCheckElement>
+        <FilterCheckElement title="Sport" count={4} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="SUV" count={3} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="SEDAN" count={1} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="CUV" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="Hatchback" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="Micro" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="Roadster" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="Coupe" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
       </FilterGroup>
 
       <FilterGroup title="SEATS">
-        <FilterCheckElement title="2 Persons" count={4}></FilterCheckElement>
-        <FilterCheckElement title="4 Persons" count={4}></FilterCheckElement>
-        <FilterCheckElement title="6 Persons" count={0}></FilterCheckElement>
-        <FilterCheckElement title="8 or more" count={0}></FilterCheckElement>
+        <FilterCheckElement title="2" count={4} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="4" count={4} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="6" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
+        <FilterCheckElement title="8" count={0} selectedFilters={props.selectedFilters} setSelectedFilters={props.setSelectedFilters}></FilterCheckElement>
       </FilterGroup>
       <FilterGroup title="PRICE">
         <RangeSlider 
           initialMin={0}
-          initialMax={1000}
+          initialMax={120}
           min={0}
-          max={1000}
+          max={100000}
           step={10}
           priceCap={10}
         ></RangeSlider>
@@ -79,6 +159,7 @@ function SideBarFilter(props) {
 
 export default function Search(props) {
     const [sidebarVisible,setSidebarVisible] = useState(false);
+    const [selectedFilters, setSelectedFilters] = useState([]);
     const toggleSidbar = (prevState) =>{
         setSidebarVisible(!prevState)
     }
@@ -87,7 +168,7 @@ export default function Search(props) {
    <NavigationBar/>
     
     <div className="page md:flex md:gap-4">
-      <SideBarFilter className="" visible={""+sidebarVisible} toggle={()=>{toggleSidbar(sidebarVisible)}} LeftIcon={getIcon("funnel")}></SideBarFilter>
+      <SideBarFilter selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} className="" visible={""+sidebarVisible} toggle={()=>{toggleSidbar(sidebarVisible)}} LeftIcon={getIcon("funnel")}></SideBarFilter>
 
       <section className="recommended flex flex-col gap-4 mt-6 flex-1 p-4 pr-6">
         <div className="flex justify-end gap-8">
@@ -96,7 +177,7 @@ export default function Search(props) {
         <BuMinimal text="Sort" className="rounded-sm" LeftIcon={getIcon("sort")}></BuMinimal>
 
         </div>
-        <CatalogueGrid></CatalogueGrid>
+        <CatalogueGrid selectedFilters={selectedFilters} ></CatalogueGrid>
       </section>
     </div>
     {/* <Footer></Footer> */}
