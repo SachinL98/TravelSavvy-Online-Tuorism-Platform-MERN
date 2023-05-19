@@ -18,6 +18,8 @@ import OneType from "./components/eventList/OneType";
 import Login from "./pages/Auth/login";
 import Signup from "./pages/Auth/signup";
 
+import AddReview from "./components/Review/AddReview";
+
 function App() {
   //const { user } = useAuthContext();
   return (
@@ -36,6 +38,7 @@ function App() {
         <Route path="/wishList" element={<WishList/>} />
         <Route path="/oneEvent/:id" element={<OneEvent/>} />
         <Route path="/oneType/:type" element={<OneType/>} />
+        <Route path="/addReview/:eventID" element={<AddReview/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -8,14 +8,16 @@ export default function OneType() {
 
   const user = JSON.parse(localStorage.getItem('user'));
   const userID = user.user._id;
-  const [events, setEvents] = useState('');
+  const [events, setEvents] = useState([]);
   const [searchKey, setSearchKey] = useState('')
   const {type} = useParams();
+  console.log(type);
 
   useEffect(()=>{
-    axios.get(`http://localhost:8000/api/events/getType/${type}`)
+    axios.get(`http://localhost:8000/api/event/getType/${type}`)
     .then((res)=>{
       setEvents(res.data)
+      console.log(res);
     })
     .catch((err)=>{
       console.log(err);
@@ -41,34 +43,32 @@ export default function OneType() {
     })
   };
 
-  const filterdEvents = events.filter((event)=>
-  event.name.toLowerCase().includes(searchKey.toLowerCase()));
-
-
   return (
-    <div>
-      <input
-        style={{ width: "20%", padding: "10px" }}
-        className="form-control"
-        type="text"
-        placeholder="Search Events Here"
-        value={searchKey}
-        onChange={(e) => {
-          setSearchKey(e.target.value);
-        }}
-      ></input>
-      <br />
-      <hr />
+    <div style={{padding: "50px"}}>
+      <div>
+        <h2><b>Here are the {type} Events !</b> ✨</h2>
+        <br/>
+        <hr/>
+      </div>
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        {filterdEvents.map((eventData) => (
+        {events.map((eventData) => (
           <div class="col">
             <div class="card" style={{ margin: "10px" }}>
-              <img src={eventData.image} class="card-img-top" alt="" />
+              <div style={{height: "100px"}}>
+                <img src={eventData.image} class="card-img-top" alt="" />
+              </div>
               <div class="card-body">
                 <h5 class="card-title">
-                  <b>{eventData.name}</b>
+                  <div style={{height: "50px"}}>
+                    <b>{eventData.name}</b>
+                  </div>
                 </h5>
-                <p class="card-text">{eventData.description}</p>
+                <p>
+                  <div style={{height: "30px"}}>
+                    Start Date : {new Date(eventData.startDate).toLocaleDateString()} 
+                  </div>
+                </p>
+                {/* <p class="card-text">{eventData.description}</p> */}
                 <div>
                   <Link to={`/oneEvent/${eventData._id}`}>
                     <button
@@ -94,6 +94,7 @@ export default function OneType() {
           </div>
         ))}
       </div>
+      
     </div>
   );
 }

@@ -70,7 +70,7 @@ export default function UserSpecificEvents() {
                 <h5 class="card-title"><b>{eventData.name}</b></h5>
                 <p class="card-text">{eventData.description}</p>
                 <div>
-                    <Link to='/updateEvent'><button type="button" class="btn btn-primary btn-sm" style={{marginRight: "10px"}}>Update</button></Link>
+                    <Link to={`/updateEvent/${eventData._id}`}><button type="button" class="btn btn-primary btn-sm" style={{marginRight: "10px"}}>Update</button></Link>
                     <button onClick={() => deleteEvent(eventData._id)} type="button" class="btn btn-danger btn-sm">Delete</button>
                 </div>
                 </div>

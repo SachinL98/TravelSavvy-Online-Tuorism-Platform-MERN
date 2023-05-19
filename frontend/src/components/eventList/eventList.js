@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import SideBar from "../SideBar";
-
 
 export default function EventList() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -47,12 +45,9 @@ export default function EventList() {
 
   return (
     <div>
-      {/* <div style={{width: "15%", display: "inline-block"}}>
-        <SideBar />
-      </div> */}
       <div>
         <input
-          style={{ width: "20%", padding: "10px" }}
+          style={{ width: "20%", padding: "10px"}}
           className="form-control"
           type="text"
           placeholder="Search Events Here"
@@ -65,24 +60,34 @@ export default function EventList() {
         <hr />
         <div class="row row-cols-1 row-cols-md-4 g-4">
           {filterdEvents.map((eventData) => (
-            <div class="col">
+            <div class="col" >
+              <Link to={`/oneEvent/${eventData._id}`} style={{textDecoration: "none" }} >
               <div class="card" style={{ margin: "10px" }}>
-                <img src={eventData.image} class="card-img-top" alt="" />
+                <div style={{height: "150px"}}>
+                  <img src={eventData.image} class="card-img-top" alt="" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                </div>
                 <div class="card-body">
-                  <h5 class="card-title">
-                    <b>{eventData.name}</b>
+                  <h5 class="card-title" >
+                    <div style={{height: "50px"}}>
+                      <b>{eventData.name}</b>
+                    </div>
                   </h5>
-                  <p class="card-text">{eventData.description}</p>
+                  <p>
+                    <div style={{height: "30px"}}>
+                      Start Date : {new Date(eventData.startDate).toLocaleDateString()} 
+                    </div>
+                  </p>
+                  {/* <p class="card-text">{eventData.description}</p> */}
                   <div>
-                    <Link to={`/oneEvent/${eventData._id}`}>
+                    
                       <button
                         type="button"
-                        class="btn btn-primary btn-sm"
+                        class="btn btn-light btn-sm"
                         style={{ marginRight: "10px" }}
                       >
-                        View Details
+                        Click To More Details
                       </button>
-                    </Link>
+                    
                     {user.user.type == "traveller" && (
                       <button
                         onClick={() => addToWishList(eventData)}
@@ -94,8 +99,9 @@ export default function EventList() {
                     )}
                   </div>
                 </div>
+                </div>
+                </Link>
               </div>
-            </div>
           ))}
         </div>
       </div>

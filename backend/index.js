@@ -2,12 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 var cors = require('cors');
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 const hotelRoute = require('./routes/hotels');
 const userRoutes = require('./routes/user');
 const roomRoute = require('./routes/rooms');
 const eventRoute = require('./routes/EventRoute');
 const wishListRoute = require('./routes/WishListRoute');
-const cookieParser = require("cookie-parser");
+const reviewRoute = require('./routes/ReviewRoute')
+
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -33,6 +35,7 @@ app.use('/api/hotel/',hotelRoute);
 app.use('/api/rooms/',roomRoute);
 app.use('/api/event', eventRoute);
 app.use('/api/wishlist', wishListRoute);
+app.use('/api/review', reviewRoute);
 
 
 app.use((err,req,res,next)=>{

@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function OneEvent() {
   const { id } = useParams();
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState('');
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/event/${id}`)
       .then((res) => {
-        console.log(res);
         setEvent(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    axios
+      .get(`http://localhost:8000/api/review/${id}`)
+        .then((res)=>{
+          setReviews(res.data);
+        })
+        .catch((err)=>{
+          console.log(err);
+        });
+
   }, []);
+
 
   return (
     <div style={{padding: "50px"}} >
@@ -40,6 +51,32 @@ export default function OneEvent() {
                 <li><h4>This is {event.duration} days event</h4></li>
             </ul> 
           </div>
+      </div>
+
+      <div>
+        <br/>
+        <br/>
+          <h2 style={{display: "inline-block"}}><b>Reviews And Ratings</b> 👌</h2>
+          <Link to={`/addReview/${id}`}><button className="btn btn-warning" style={{display: "inline-block", marginLeft: "20px"}}>Add New</button></Link>
+        <hr/>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" style={{width: "200px"}}>Name</th>
+                <th scope="col" style={{width: "200px"}}>Ratings</th>
+                <th scope="col">Reviews</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reviews.map((review)=>(
+                <tr>
+                  <td>{review.userName}</td>
+                  <td>{review.rating} Out Of 5</td>
+                  <td>{review.reviewData}</td>
+                </tr>
+              ))}  
+            </tbody>
+          </table>
       </div>
     </div>
   );

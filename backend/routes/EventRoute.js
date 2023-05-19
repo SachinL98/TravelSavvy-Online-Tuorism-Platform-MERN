@@ -91,7 +91,19 @@ router.route('/getType/:type').get((req, res)=>{
 });
 
 //Update Event
+router.route('/update/:id').patch((req, res)=>{
+    const {id} = req.params;
+    const {image, name, description, location, organizerName, type, startDate, duration} = req.body;
+    const newData = {image, name, description, location, organizerName, type, startDate, duration};
 
+    Event.findByIdAndUpdate(id, newData)
+    .then(() => {
+        res.status(200).send("Product Updated");
+    }).catch((err) => {
+        console.log(err);   
+        res.send(500).send("Update Failed");
+    })
+})
 
 
 //Delete Event
