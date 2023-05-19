@@ -8,30 +8,30 @@ import { useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import Reserve from "../../components/reserveHotel/reserve";
 
 export default function Hotel() {
-
-  const location = useLocation()
+  const location = useLocation();
 
   const id = location.pathname.split("/")[2];
 
-  const [openModel,setOpenModel] = useState(false)
-  
+  const [openModel, setOpenModel] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { data, loading, error } = useFetch(
     `http://localhost:8000/api/hotel/find/${id}`
   );
 
-  const {date} = useContext(SearchContext);
+  console.log(data);
 
-const dateDiff = date[0].endDate - date[0].startDate
-const perDay = 1000*60*60*24  
+  const { date } = useContext(SearchContext);
 
-  const days = dateDiff/perDay + 1
+  const dateDiff = date[0].endDate - date[0].startDate;
+  const perDay = 1000 * 60 * 60 * 24;
+
+  const days = dateDiff / perDay + 1;
 
   const photos = [
     {
@@ -54,68 +54,67 @@ const perDay = 1000*60*60*24
     },
   ];
 
-
   //get user
   const { user } = useAuthContext();
 
-  const handleClick = ()=>{
-      if(user){
-
-        navigate(`/reserve/${id}`)
-
-      }else{
-        navigate('/login')
-      }
-  }
+  const handleClick = () => {
+    if (user) {
+      navigate(`/reserve/${id}`);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div>
       <Navbar />
-      
 
-      { loading ? "loading" :  <div className="hotelContainer">
-        <div className="hotelWrapper">
-          <button className="bookNow" onClick={handleClick}>Reserve or Book Now</button>
-          <h1 className="hotelTitle">{data.name}</h1>
-          <div className="hotelAddress">
-            <FontAwesomeIcon icon={faLocationDot} />
-            <span>{data.address}</span>
-          </div>
-          <span className="hotelDistance">
-            {data.distance}
-          </span>
-          <span className="hotelPriceHighlight">
-            Book a stay over {data.cheapestPrice} at this proprtty and get a free airport taxi
-          </span>
-          <div className="hotelImages">
-            {photos.map((photo) => (
-              <div className="hotelImgWrapper">
-                <img src={photo.src} alt="" className="hotelImg" />
-              </div>
-            ))}
-          </div>
-
-          <div className="hotelDetails">
-            <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">{data.title}</h1>
-              <p className="hotelDesc">
-               {data.desc}
-              </p>
+      {loading ? (
+        "loading"
+      ) : (
+        <div className="hotelContainer">
+          <div className="hotelWrapper">
+            <button className="bookNow" onClick={handleClick}>
+              Reserve or Book Now
+            </button>
+            <h1 className="hotelTitle">{data.name}</h1>
+            <div className="hotelAddress">
+              <FontAwesomeIcon icon={faLocationDot} />
+              <span>{data.address}</span>
             </div>
-            <div className="hotelDetailsPrice">
-            <h1>Perfect for a {days}-night stay!</h1>
-              <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
-              </span>
-              <h2>
-                <b>Rs. {days * data.cheapestPrice}.00</b> ({days} nights)
-              </h2>
-              <button onClick={handleClick}>Reserve or Book Now!</button>
+            <span className="hotelDistance">{data.distance}</span>
+            <span className="hotelPriceHighlight">
+              Book a stay over {data.cheapestPrice} at this proprtty and get a
+              free airport taxi
+            </span>
+            <div className="hotelImages">
+              {data.urls?.map((photo, i) => (
+                <div className="hotelImgWrapper">
+                  <img src={photo} alt="" className="hotelImg" />
+                </div>
+              ))}
+            </div>
+
+            <div className="hotelDetails">
+              <div className="hotelDetailsTexts">
+                <h1 className="hotelTitle">{data.title}</h1>
+                <p className="hotelDesc">{data.desc}</p>
+              </div>
+              <div className="hotelDetailsPrice">
+                <h1>Perfect for a {days}-night stay!</h1>
+                <span>
+                  Located in the real heart of Krakow, this property has an
+                  excellent location score of 9.8!
+                </span>
+                <h2>
+                  <b>Rs. {days * data.cheapestPrice}.00</b> ({days} nights)
+                </h2>
+                <button onClick={handleClick}>Reserve or Book Now!</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 }

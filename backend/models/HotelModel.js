@@ -25,7 +25,7 @@ const HotelSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  images: {
+  urls: {
     type: [String],
   },
   desc: {
@@ -50,7 +50,7 @@ const HotelSchema = new mongoose.Schema({
   },
   featured: {
     type: Boolean,
-    default:false
+    default: false,
   },
 });
 

@@ -9,6 +9,7 @@ import HotelOwner from "./pages/signUp/partnerAccount.js";
 import Property from "./pages/property/property.js";
 import AddProperty from "./pages/addProperty/addProperty.js";
 import UpdateProperty from "./pages/UpdateProperty/updateProperty.js";
+import Profile from "./pages/UserProfile/Profile.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<List />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/hotels/:id" element={<Hotel />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />

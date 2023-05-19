@@ -30,7 +30,7 @@ export default function UpdateProperty() {
       setDesc(data.desc);
       setCheapest(data.cheapestPrice);
       setHoteType(data.type);
-      setSelectedImages(data.images);
+      setSelectedImages(data.urls);
     }
   }, [data]);
 

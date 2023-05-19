@@ -138,8 +138,16 @@ const saveReservation = async (req, res) => {
   }
 };
 
-const getReservationByUser = async (req, res) => {
+const getReservationByHotel = async (req, res) => {
   const reservations = await Reservation.find({ id: req.params.id });
+
+  if (reservations) {
+    res.status(200).json(reservations);
+  }
+};
+
+const getReservationByUser = async (req, res) => {
+  const reservations = await Reservation.find({ userID: req.params.id });
 
   if (reservations) {
     res.status(200).json(reservations);
@@ -158,5 +166,6 @@ module.exports = {
   getHotelRooms,
   getHotelByUser,
   saveReservation,
+  getReservationByHotel,
   getReservationByUser,
 };

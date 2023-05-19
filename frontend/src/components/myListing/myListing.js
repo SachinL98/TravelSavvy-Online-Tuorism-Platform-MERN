@@ -53,10 +53,10 @@ export default function MyListing() {
           <>
             {data.map((item) => (
               <div class="card">
-                {item.images[0] ? (
+                {item.urls[0] ? (
                   <img
                     className="cardimgtop"
-                    src={item.images[0]}
+                    src={item.urls[0]}
                     alt="Card image cap"
                   />
                 ) : (

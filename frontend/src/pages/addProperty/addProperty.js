@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar/navbar";
 import "./addProperty.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { storage } from "../../components/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export default function AddProperty() {
   const [name, setHotelName] = useState("");
@@ -18,7 +20,8 @@ export default function AddProperty() {
   const [cheapestPrice, setCheapest] = useState("");
   const [type, setHoteType] = useState("");
   const [images, setSelectedImages] = useState([]);
-  
+  const [urls, setUrls] = useState([]);
+
   const navigate = useNavigate();
 
   const handleDropdown = (event) => {
@@ -26,64 +29,147 @@ export default function AddProperty() {
   };
 
   const { user } = useAuthContext();
-  const userID = user.user._id
+  const userID = user.user._id;
+
+  const uploadImg = () => {
+    const promises = [];
+    images.map((image) => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      promises.push(uploadTask);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          //setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          await storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((urls) => {
+              setUrls((prevState) => [...prevState, urls]);
+            });
+        }
+      );
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(name, city, title, address, distance, desc, cheapestPrice,images,userID);
+    console.log(
+      name,
+      city,
+      title,
+      address,
+      distance,
+      desc,
+      cheapestPrice,
+      urls,
+      userID
+    );
 
-    if((name == null || name == "") || (city == null || city == "") || (title == null|| title == "") || (address == null || address == "") ||  (desc == null|| desc == "") || (cheapestPrice == null||cheapestPrice == "") || (images == null || images == "")){
+    if (
+      name == null ||
+      name == "" ||
+      city == null ||
+      city == "" ||
+      title == null ||
+      title == "" ||
+      address == null ||
+      address == "" ||
+      desc == null ||
+      desc == "" ||
+      cheapestPrice == null ||
+      cheapestPrice == "" ||
+      urls == null ||
+      urls == ""
+    ) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please Fill All Feilds',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Please Fill All Feilds",
+      });
 
-      return
-    }else{
-      await addListing(name,type ,city, title, address, distance, desc, cheapestPrice,images,userID);
+      return;
+    } else {
+      await addListing(
+        name,
+        type,
+        city,
+        title,
+        address,
+        distance,
+        desc,
+        cheapestPrice,
+        urls,
+        userID
+      );
     }
-
-    
   };
 
-  const onSelectImage = (event) => {
-    const selectedImages = event.target.files;
-    const selectedImageArray = Array.from(selectedImages);
-    const imagesArray = selectedImageArray.map((file) => {
-      return URL.createObjectURL(file);
+  const onSelectImage = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newImage = e.target.files[i];
+      newImage["id"] = Math.random();
+      setSelectedImages((prevState) => [...prevState, newImage]);
+    }
+  };
+
+  const addListing = async (
+    name,
+    type,
+    city,
+    title,
+    address,
+    distance,
+    desc,
+    cheapestPrice,
+    urls,
+    userID
+  ) => {
+    const response = await fetch("http://localhost:8000/api/hotel", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        type,
+        city,
+        title,
+        address,
+        distance,
+        desc,
+        cheapestPrice,
+        urls,
+        userID,
+      }),
     });
 
-    setSelectedImages(imagesArray);
+    console.log(response.status);
+
+    if (response.status == 200) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      navigate("/property");
+    }
   };
-
-  const addListing = async (name,type,city, title, address, distance, desc, cheapestPrice,images,userID)=>{
-    const response = await fetch('http://localhost:8000/api/hotel',{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name,type ,city, title, address, distance, desc, cheapestPrice,images,userID})
-        })
-
-        console.log(response.status)
-
-        if(response.status == 200){
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-          })
-
-          navigate('/property');
-        }
-  }
 
   return (
     <div>
       <Navbar />
-      <form className="addP" onSubmit={handleSubmit} action="">
+      <form className="addP" onSubmit={handleSubmit}>
         <div className="addPTitles">
           <center>
             <h2 style={{ color: "#003580" }}>Add Property List</h2>
@@ -180,16 +266,14 @@ export default function AddProperty() {
           </div>
         </div>
         <div className="images">
-          
-        {images &&
-          images.map((image, index) => {
-            return (
-              <div key={image} className="image">
-                <img src={image} height="120" width="200" alt="upload" />
-              
-              </div>
-            );
-          })}
+          {urls.map((url, i) => (
+            <img
+              key={i}
+              style={{ width: "200" }}
+              src={url || "http://via.placeholder.com/300"}
+              alt="firebase-image"
+            />
+          ))}
 
           <label>
             <input
@@ -201,7 +285,20 @@ export default function AddProperty() {
               multiple
               accept="image/png , image/jpeg , image/webp"
             />
-            <FontAwesomeIcon icon={faUpload} /> Upload Images
+            <FontAwesomeIcon icon={faPlus} /> Select Images
+          </label>
+
+          <label
+            onClick={uploadImg}
+            style={{
+              backgroundColor: "#003580",
+              width: "150px",
+              fontSize: "15px",
+              color: "white",
+            }}
+          >
+            <FontAwesomeIcon icon={faUpload} />
+            Upload Images
           </label>
         </div>
         <center>

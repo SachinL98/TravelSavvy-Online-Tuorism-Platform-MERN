@@ -12,6 +12,7 @@ const {
   getHotelRooms,
   getHotelByUser,
   saveReservation,
+  getReservationByHotel,
   getReservationByUser,
 } = require("../controllers/hotelController");
 
@@ -47,7 +48,10 @@ router.get("/userId/:id", getHotelByUser);
 //POST RESERVATION
 router.post("/saveReservation", saveReservation);
 
-//GET RESERVATION BY USER
-router.get("/getReservation/:id", getReservationByUser);
+//GET RESERVATION BY Hotel
+router.get("/getReservation/:id", getReservationByHotel);
+
+//GET RESERVATION BY User
+router.get("/getReservationbyUser/:id", getReservationByUser);
 
 module.exports = router;
