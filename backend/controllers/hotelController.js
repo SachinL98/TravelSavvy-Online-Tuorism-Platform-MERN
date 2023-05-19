@@ -1,6 +1,7 @@
 const express = require("express");
 const Hotel = require("../models/HotelModel");
-const Room = require('../models/RoomsModel')
+const Room = require("../models/RoomsModel");
+const Reservation = require("../models/ReservationModel");
 
 const createHotel = async (req, res) => {
   const newHotel = new Hotel(req.body);
@@ -102,11 +103,13 @@ const getFeaturedHotels = async (req, res, next) => {
 const getHotelRooms = async (req, res, next) => {
   try {
     const hotel = await Hotel.findById(req.params.id);
-    const roomsList = await Promise.all(hotel.rooms.map(room=>{
-      return Room.findById(room)
-    }))
+    const roomsList = await Promise.all(
+      hotel.rooms.map((room) => {
+        return Room.findById(room);
+      })
+    );
 
-    res.status(200).json(roomsList)
+    res.status(200).json(roomsList);
   } catch (err) {
     next(err);
   }
@@ -114,11 +117,32 @@ const getHotelRooms = async (req, res, next) => {
 
 const getHotelByUser = async (req, res, next) => {
   try {
-    const hotels = await Hotel.find({userID:req.params.id})
-    
-    res.status(200).json(hotels)
+    const hotels = await Hotel.find({ userID: req.params.id });
+
+    res.status(200).json(hotels);
   } catch (err) {
     next(err);
+  }
+};
+
+const saveReservation = async (req, res) => {
+  //res.status(200).json("reservation");
+
+  const newReservation = new Reservation(req.body);
+
+  try {
+    const savedReservation = await newReservation.save();
+    res.status(200).json(savedReservation);
+  } catch (err) {
+    res.status(500).json("error");
+  }
+};
+
+const getReservationByUser = async (req, res) => {
+  const reservations = await Reservation.find({ id: req.params.id });
+
+  if (reservations) {
+    res.status(200).json(reservations);
   }
 };
 
@@ -133,4 +157,6 @@ module.exports = {
   getFeaturedHotels,
   getHotelRooms,
   getHotelByUser,
+  saveReservation,
+  getReservationByUser,
 };

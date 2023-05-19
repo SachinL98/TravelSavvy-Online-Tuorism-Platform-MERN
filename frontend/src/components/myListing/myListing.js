@@ -1,5 +1,5 @@
-import React from "react";
-import {useNavigate} from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./myListing.css";
 import useFetch from "../../hooks/useFetch";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -11,11 +11,11 @@ export default function MyListing() {
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
+  const [deleted, setDelete] = useState(false);
+
   const { data, loading, error } = useFetch(
     `http://localhost:8000/api/hotel/userId/${user.user._id}`
   );
-
-  //console.log(data);
 
   const setIdToDelete = (id) => {
     Swal.fire({
@@ -37,12 +37,15 @@ export default function MyListing() {
       }
     });
 
-    navigate('/property');
+    navigate("/property");
+  };
+
+  const updateListItem = (id) => {
+    navigate(`/updateproperty/${id}`);
   };
 
   return (
     <div>
-      <h2 className="listingHeader">My Listing</h2>
       <div className="fp">
         {loading ? (
           "Loading"
@@ -70,17 +73,27 @@ export default function MyListing() {
                   <p class="card-address">Address : {item.address}</p>
                   <p class="card-price">Price : Rs.{item.cheapestPrice}.00</p>
                   <div className="btn">
-                    <button style={{ backgroundColor: "white" }}>
-                      <FontAwesomeIcon icon={faPen} />
-                    </button>
-                    <button
-                      style={{ backgroundColor: "#EE067D" }}
-                      onClick={() => {
-                        setIdToDelete(item._id);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faTrashCan} />
-                    </button>
+                    <div className="nothing"></div>
+
+                    <div className="buttons">
+                      <button
+                        style={{ backgroundColor: "#003580" }}
+                        onClick={() => {
+                          updateListItem(item._id);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faPen} />
+                      </button>
+
+                      <button
+                        style={{ backgroundColor: "#EE067D" }}
+                        onClick={() => {
+                          setIdToDelete(item._id);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

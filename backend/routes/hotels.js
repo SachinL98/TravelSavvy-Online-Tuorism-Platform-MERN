@@ -11,6 +11,8 @@ const {
   getFeaturedHotels,
   getHotelRooms,
   getHotelByUser,
+  saveReservation,
+  getReservationByUser,
 } = require("../controllers/hotelController");
 
 //CREATE
@@ -28,7 +30,6 @@ router.get("/", getAllHotels);
 //GET ONE
 router.get("/find/:id", getOneHotel);
 
-
 //GET HOTEL COUNT BY CITY
 router.get("/countByCity", countByCity);
 
@@ -40,8 +41,13 @@ router.get("/getFeaturedHotels", getFeaturedHotels);
 
 router.get("/room/:id", getHotelRooms);
 
-
 //GET USERS HOTELS
 router.get("/userId/:id", getHotelByUser);
+
+//POST RESERVATION
+router.post("/saveReservation", saveReservation);
+
+//GET RESERVATION BY USER
+router.get("/getReservation/:id", getReservationByUser);
 
 module.exports = router;

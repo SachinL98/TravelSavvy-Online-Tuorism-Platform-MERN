@@ -1,78 +1,82 @@
-*{
+* {
     margin: 0;
 }
 
-.fp{
-    
+.fp {
+
     display: flex;
-    justify-content:baseline;
+    justify-content: baseline;
     width: fit-content;
     margin-left: 100px;
 }
 
-.listingHeader{
+.listingHeader {
     margin-left: 100px;
     color: #003580;
     font-weight: bolder;
 }
 
-.card{
+.card {
     border: 1px solid lightslategray;
     margin: 20px;
-    border-radius: 5px; 
+    border-radius: 5px;
     width: fit-content;
 }
 
-.cardimgtop{
+.cardimgtop {
     width: 300px;
     height: 200px;
     border-radius: 5px;
 }
 
-.cardbody{
+.cardbody {
     padding: 5px;
     gap: 5px;
 }
 
-.btn{
+.btn {
     margin-top: 10px;
     gap: 10px;
     display: flex;
     justify-content: space-between;
 }
 
-.card-title{
+.card-title {
     gap: 5px;
-    color:gray;
+    color: gray;
     width: fit-content;
     padding: 2px;
     font-weight: bolder;
     margin: 2px;
 }
 
-.card-type{
-    font-size: 15px;
-    color: gray;
-    margin: 2px;
-}
-.card-city{
-    font-size: 14px;
-    color: gray;
-    margin: 2px;
-}
-.card-address{
-    font-size: 13px;
-    color: gray;  
-    padding: 2px;
-    margin: 2px;
-}
-.card-price{
+.card-type {
     font-size: 15px;
     color: gray;
     margin: 2px;
 }
 
-.btn>button{
+.card-city {
+    font-size: 14px;
+    color: gray;
+    margin: 2px;
+}
+
+.card-address {
+    font-size: 13px;
+    color: gray;
+    padding: 2px;
+    margin: 2px;
+}
+
+.card-price {
+    font-size: 15px;
+    color: gray;
+    margin: 2px;
+}
+
+
+.buttons>button {
     border-radius: 5px;
     padding: 8px;
     width: fit-content;
@@ -80,4 +84,5 @@
     cursor: pointer;
     border: none;
     color: white;
+    margin: 2px;
 }
