@@ -8,6 +8,9 @@ const userRoute = require('./routes/users');
 const roomRoute = require('./routes/rooms')
 const cookieParser = require("cookie-parser");
 
+const eventRoute = require('./routes/EventRoute');
+const wishListRoute = require('./routes/WishListRoute');
+const reviewRoute = require('./routes/ReviewRoute')
 
 
 const app = express();
@@ -34,7 +37,9 @@ app.use('/api/auth/',authRoute)
 app.use('/api/users/',userRoute)
 app.use('/api/hotel/',hotelRoute)
 app.use('/api/rooms/',roomRoute)
-
+app.use('/api/event', eventRoute);
+app.use('/api/wishlist', wishListRoute);
+app.use('/api/review', reviewRoute);
 
 app.use((err,req,res,next)=>{
   const errStatus = err.status || 500
