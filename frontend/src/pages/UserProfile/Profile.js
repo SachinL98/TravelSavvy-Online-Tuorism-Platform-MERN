@@ -10,7 +10,7 @@ export default function Profile() {
   console.log(user.user._id);
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <UserProfile />
     </div>
   );

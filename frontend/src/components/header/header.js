@@ -5,9 +5,11 @@ import {
   faCalendarDays,
   faCar,
   faLandmark,
+  faMap,
   faPeopleGroup,
   faPlane,
   faTaxi,
+  faTrain,
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
@@ -15,7 +17,7 @@ import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -80,11 +82,19 @@ export default function Header({ type }) {
           </div>
           <div className="headerListItem">
             <FontAwesomeIcon icon={faUmbrellaBeach} />
-            <span>Events</span>
+            <Link to = "/events"><span style={{color:"white"}}>Events</span></Link>
           </div>
           <div className="headerListItem">
             <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport Taxis</span>
+            <Link to = "/carHome"><span style={{color:"white"}}>Car Rental</span></Link>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faMap} />
+            <Link to = "/tripPlan"><span style={{color:"white"}}>Trip Plan</span></Link>
+          </div>
+          <div className="headerListItem">
+            <FontAwesomeIcon icon={faTrain} />
+            <Link to = "/allTrains"><span style={{color:"white"}}>Trains</span></Link>
           </div>
         </div>
         {type !== "lists" && (

@@ -7,7 +7,7 @@ export default function eventPageHeader() {
   return (
     <div>
         <div style={{display: "inline-block"}}>
-            <h2><b>Hello {user.user.firstname} 👋 Pick a Event & Enjoy !</b> ❤️</h2>
+            <h2><b>Hello { user.user.firstname} 👋 Pick a Event & Enjoy !</b> ❤️</h2>
             <p style={{fontFamily: "cursive"}}>Now you can find your favourite events and save them 💫</p>
         </div>
 

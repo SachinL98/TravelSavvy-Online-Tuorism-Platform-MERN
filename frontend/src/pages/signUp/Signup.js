@@ -34,7 +34,7 @@ const Signup = () => {
 
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
     <form className="signup" onSubmit={handleSubmit} action="">
       <h3 style={{color:"#003580" , fontWeight:"bold"}}>Sign Up</h3>
       <br />

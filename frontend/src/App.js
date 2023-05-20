@@ -44,6 +44,8 @@ import Checkout from "./pages/Checkout/Checkout.js";
 import ReservationSuccessful from "./components/reservationSuccess.js";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
   return (
     <BrowserRouter> 
       <Navbar/>
@@ -57,7 +59,7 @@ function App() {
         <Route path="/reserve/:id" element={<Reserve />} />
         <Route path="/partnerAccount" element={<HotelOwner />} />
         <Route path="/property" element={<Property />} />
-        <Route path="/addproperty" element={<AddProperty />} />
+        <Route path="/addproperty"  element={ user && user.user.type == 'hotelOwner' ?  <AddProperty /> : <Home/>} />
         <Route path="/updateproperty/:id" element={<UpdateProperty />} />
 
         <Route path="/" element={<Home/>} />
@@ -66,7 +68,7 @@ function App() {
         <Route path="/hotels" element={<List/>} />
         <Route path="/hotels/:id" element={<Hotel/>} />
         <Route path="/events" element={<Events/>} />
-        <Route path="/addEvent" element={<AddEvent/>} />
+        <Route path="/addEvent" element={user && user.user.type == 'event' ? <AddEvent/> : <Home/>} />
         <Route path="/updateEvent/:id" element={<UpdateEvent/>} />
         <Route path="/manageEvent" element={<UserEvents/>} />
         <Route path="/wishList" element={<WishList/>} />

@@ -35,7 +35,7 @@ const Signup = () => {
 
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
     <form className="signup" onSubmit={handleSubmit} action="">
       <h3 style={{color:"#003580" , fontWeight:"bold"}}>Create Our Partner Account</h3>
       <br /><br />

@@ -19,7 +19,7 @@ const Login = () => {
   return (
     
     <div className="background">
-      <Navbar />
+      {/* <Navbar /> */}
     <form className="login" style={{backgroundColor:'0071c2'}} onSubmit={handleSubmit} action="">
       <h3 style={{color:"#003580" , fontWeight:"bold"}}>Login</h3>
       <br /><br />
