@@ -35,7 +35,7 @@ export default function Navbar() {
 
           <button className="navButton" onClick={handleClick}>Logout</button>
           </div>)  
-          : user && user.user.type == "user" ? (
+          : user  ? (
             (
             <div className="navItems">
             <Link to="/profile" style={{ color: "white", textDecoration: "none" }}>

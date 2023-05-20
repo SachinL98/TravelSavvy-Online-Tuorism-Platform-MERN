@@ -64,36 +64,29 @@ export default function UpdateEventForm() {
   };
 
   const handleUpload = () => {
-    if (!file) {
-      alert("Please upload an image first!");
-    }
-
-    const storageRef = ref(storage, `/files/${file.name}`);
-
-    // progress can be paused and resumed. It also exposes progress updates.
-    // Receives the storage reference and the file to upload.
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
+    const uploadTask = storage.ref(`images/${file.name}`).put(file);
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        const percent = Math.round(
+      snapshot => {
+        const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-
-        // update progress
-        setPercent(percent);
+        //setProgress(progress);
       },
-      (err) => console.log(err),
+      error => {
+        console.log(error);
+      },
       () => {
-        // download url
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
-          setImage(url)
-        });
-      }
-    );
-  };
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setImage(url);
+          });
+      }
+    );
+  }
 
 
   return (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Events from '../../images/events.png';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import storage from "../../firebase/firebaseConfig"
+import {storage} from "../../firebase/firebaseConfig"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import './events.css';
 import Swal from "sweetalert2";
@@ -12,7 +12,7 @@ export default function AddNewEvent() {
   const navigate = useNavigate();
 
   const userID = user.user._id
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -21,7 +21,7 @@ export default function AddNewEvent() {
   const [startDate, setStartDate] = useState('');
   const [duration, setDuration] = useState(0);
 
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const [percent, setPercent] = useState(0);
 
   function handleChange(event) {
@@ -32,39 +32,37 @@ export default function AddNewEvent() {
     setType(event.target.value);
   };
 
-  const handleUpload = () => {
-    if (!file) {
-      alert("Please upload an image first!");
-    }
-
-    const storageRef = ref(storage, `/files/${file.name}`);
-
-    // progress can be paused and resumed. It also exposes progress updates.
-    // Receives the storage reference and the file to upload.
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
+  const handleUpload = async () => {
+    const uploadTask = storage.ref(`images/${file.name}`).put(file);
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        const percent = Math.round(
+      snapshot => {
+        const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-
-        // update progress
-        setPercent(percent);
+        //setProgress(progress);
       },
-      (err) => console.log(err),
-      () => {
-        // download url
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          console.log(url);
-          setImage(url)
-        });
-      }
-    );
-  };
+      error => {
+        console.log(error);
+      },
+      async () => {
+        await storage
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then(url => {
+            setImage(url);
+          });
+         
+      }
+    );
+  }
+console.log(image);
+  
 
   function sendEventData(e){
+
+    console.log(image);
     e.preventDefault();
     const newEvent = {userID, image, name, description, location, orgnizerName, type, startDate, duration};
 
@@ -212,4 +210,5 @@ export default function AddNewEvent() {
 
     </div>
   );
+
 }
