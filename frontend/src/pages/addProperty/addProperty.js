@@ -168,7 +168,7 @@ export default function AddProperty() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <form className="addP" onSubmit={handleSubmit}>
         <div className="addPTitles">
           <center>

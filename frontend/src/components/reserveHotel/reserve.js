@@ -72,15 +72,16 @@ export default function Reserve() {
       imageHeight: 200,
       imageAlt: "Custom image",
     });
+    navigate('/');
   };
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="reserve">
         <div className="rContainer">
-          <span>Select your Rooms </span>
+          <span>Comfirm your  Reservation </span>
           {data.map((item) => (
             <div className="rItem">
               <div className="rItemInfo">

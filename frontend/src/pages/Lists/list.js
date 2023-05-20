@@ -33,7 +33,7 @@ export default function List() {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <Header type="lists" />
 
       <div className="listContainer">

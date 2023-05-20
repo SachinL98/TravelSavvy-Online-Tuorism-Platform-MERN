@@ -106,15 +106,7 @@ export default function UpdateProperty() {
     }
   };
 
-  const onSelectImage = (event) => {
-    const selectedImages = event.target.files;
-    const selectedImageArray = Array.from(selectedImages);
-    const imagesArray = selectedImageArray.map((file) => {
-      return URL.createObjectURL(file);
-    });
-
-    setSelectedImages(imagesArray);
-  };
+  
 
   const addListing = async (
     name,
@@ -128,8 +120,8 @@ export default function UpdateProperty() {
     images,
     userID
   ) => {
-    const response = await fetch("http://localhost:8000/api/hotel", {
-      method: "POST",
+    const response = await fetch(`http://localhost:8000/api/hotel/${hotelId}`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name,
@@ -162,7 +154,7 @@ export default function UpdateProperty() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <form className="addP" onSubmit={handleSubmit} action="">
         <div className="addPTitles">
           <center>
@@ -263,18 +255,7 @@ export default function UpdateProperty() {
               );
             })}
 
-          <label>
-            <input
-              type="file"
-              style={{ display: "none" }}
-              name="images"
-              id=""
-              onChange={onSelectImage}
-              multiple
-              accept="image/png , image/jpeg , image/webp"
-            />
-            <FontAwesomeIcon icon={faUpload} /> Upload Images
-          </label>
+         
         </div>
         <center>
           <button className="addBtn">Update Listing</button>

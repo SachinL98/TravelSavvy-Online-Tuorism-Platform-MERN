@@ -67,7 +67,7 @@ export default function Hotel() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
 
       {loading ? (
         "loading"

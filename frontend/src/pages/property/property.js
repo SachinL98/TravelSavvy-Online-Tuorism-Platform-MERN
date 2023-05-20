@@ -20,7 +20,7 @@ export default function Property() {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="listcontainer">
         <div className="titles">
           <h2 style={{ color: "#003580", fontWeight: "bolder" }}>

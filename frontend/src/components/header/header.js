@@ -105,6 +105,7 @@ export default function Header({ type }) {
                   className="headerSearchInput"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)} required
+                  style={{color:"black"}}
                 />
               </div>
               <div className="headerSearchItem">

@@ -20,7 +20,7 @@ const {
 router.post("/", createHotel);
 
 //UPDATE
-router.put("/:id", updateHotel);
+router.patch("/:id", updateHotel);
 
 //DELETE
 router.delete("/:id", deleteHotel);
