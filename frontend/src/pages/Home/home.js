@@ -5,7 +5,7 @@ import Featured from '../../components/featured/featured'
 import PropertyList from '../../components/propertyList/propertyList'
 import FeaturedProperties from '../../components/featuredProperties/featuredProperties'
 
-export default function home() {
+export default function Home() {
   return (
     <div>
       <Navbar/>
