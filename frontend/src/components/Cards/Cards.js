@@ -4,6 +4,7 @@ import "./Cards.css";
 import { Link } from "react-router-dom";
 
 export function CatalogueCard(props) {
+  const user = localStorage.getItem("user");
   const {
     image,
     name,
@@ -15,6 +16,13 @@ export function CatalogueCard(props) {
     transition,
     fuel,
   } = props.car;
+
+  const { car, deleteCar } = props;
+
+  function handleDeleteCar(id) {
+    deleteCar(id);
+  }
+
   const FuelIcon = getIcon("fuel");
   const TransitionIcon = getIcon("transition");
   const PersonsIcon = getIcon("persons");
@@ -32,7 +40,14 @@ export function CatalogueCard(props) {
         />
       </div>
       <div className="flex flex-col gap-4 items-center flex-1">
-        <img onMouseDown={(e)=>{e.preventDefault()}} className="catalogue-card__pircture flex-1 my-4  w-56 object-contain" src={image} alt={name} />
+        <img
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
+          className="catalogue-card__pircture flex-1 my-4  w-56 object-contain"
+          src={image}
+          alt={name}
+        />
         <div className="catalogue-card__specs flex flex-row gap-4 justify-between text-light">
           <div className="spec-group flex flex-row gap-2 items-end">
             <FuelIcon />
@@ -59,7 +74,7 @@ export function CatalogueCard(props) {
             })}
             /<span className="fs-sm text-dark fw-base">day</span>
           </p>
-          {oldPrice>0 && (
+          {oldPrice > 0 && (
             <p className="fw-bold fs-regular text-linethrough text-light">
               $
               {oldPrice.toLocaleString(undefined, {
@@ -69,15 +84,23 @@ export function CatalogueCard(props) {
             </p>
           )}
         </div>
-        <Link
-           to={`/checkout`}
-         >
-        <BuAccent
-          className=" bu-med fw-base flex-1 rounded-sm py-8"
-          text="Rent Now"
-        />
-        </Link>
-
+        <div className="flex gap-4">
+          <Link to={`/checkout`}>
+            <BuAccent className="bu-med fw-base rounded-sm" text="Rent Now" />
+          </Link>
+          <Link to={`#`}>
+            {user && (
+              <BuAccent className="bu-med fw-base rounded-sm" text="Update" />
+            )}
+          </Link>
+          {user && (
+            <BuAccent
+              className="bu-med fw-base rounded-sm"
+              text="Delete"
+              onClick={() => handleDeleteCar(car._id)}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

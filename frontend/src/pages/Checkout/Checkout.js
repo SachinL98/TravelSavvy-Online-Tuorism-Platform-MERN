@@ -29,9 +29,17 @@ export default function Checkout() {
   }
 
   useEffect(() => {}, [formState]);
+
+  const handleRentalInfoChange = (field, value) => {
+    // Update rental information and pass it to RentalSummary
+    updateField("rental", field, value);
+  };
+
+  const { pickupTime, dropoffTime } = formState.rental;
+
   return (
     <>
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <div className="grid md:grid-cols-5 w-full max-w-6xl m-auto p-4 gap-4">
         <BillingInfo
           className="md:col-span-3 col-start-1 self-start"
@@ -60,6 +68,8 @@ export default function Checkout() {
 
         <RentalSummary
           car={GTR}
+          pickupTime={pickupTime}
+          dropoffTime={dropoffTime}
           className="md:col-span-2 row-span-2 self-start md:col-start-4 col-start-1 row-start-1"
         ></RentalSummary>
       </div>

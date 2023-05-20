@@ -10,7 +10,7 @@ export default function Car() {
 
   return (
     <>
-      <NavigationBar/>
+      {/* <NavigationBar/> */}
       <div className="content m-auto my-8 px-4 max-w-[72rem] flex flex-col gap-12">
         <CarSection/>
         <ReviewsSection/>

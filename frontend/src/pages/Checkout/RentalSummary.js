@@ -1,6 +1,22 @@
+import { useState, useEffect } from "react";
 import { BuAccent, BuSecondary } from "../../components/Buttons/Buttons";
 import TextBox from "../../components/FormControls/TextBox";
 export default function RentalSummary(props) {
+  const [days, setDays] = useState(1); // Default to 1 day
+  const [totalPrice, setTotalPrice] = useState(props.car.price); // Default total price as car price
+
+  useEffect(() => {
+    // Calculate the number of days between pick-up and drop-off times
+    const pickupTime = new Date(props.pickupTime);
+    const dropoffTime = new Date(props.dropoffTime);
+    const timeDiff = dropoffTime.getTime() - pickupTime.getTime();
+    const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Convert milliseconds to days
+    setDays(dayDiff);
+  
+    // Calculate the new total price based on the number of days
+    const newTotalPrice = dayDiff * props.car.price;
+    setTotalPrice(newTotalPrice);
+  }, [props.pickupTime, props.dropoffTime, props.car.price]);
   return (
     <div
       className={`${props.className} summary bg-white grid md:grid-cols-3 rounded-xl py-6 px-4 sm:p-8 gap-y-1 `}
