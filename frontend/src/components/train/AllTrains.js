@@ -7,6 +7,7 @@ import NavigationBar from "../navbar";
 //import ImageView from "../ImageView";
 
 export default function AllTrains() {
+  const user = localStorage.getItem("user");
   const [train, setTrain] = useState([]);
   const [deleted, setDeleted] = useState(false);
   //const user = JSON.parse(localStorage.getItem('user'));
@@ -62,7 +63,7 @@ export default function AllTrains() {
   return (
     <div>
       
-      <NavigationBar />
+      {/* <NavigationBar /> */}
       <h2
         className="display-4 fw-bold mb-4"
         style={{
@@ -79,6 +80,7 @@ export default function AllTrains() {
       </h2>
       <HeroSection />
       <div className="d-flex justify-content-center mt-4 mb-4">
+      {user && (
         <Link to="/addNewTrain">
           <button
             className="btn btn-success btn-lg"
@@ -87,6 +89,7 @@ export default function AllTrains() {
             Add New Train
           </button>
         </Link>
+      )}
       </div>
       <hr />
       <div
@@ -156,18 +159,22 @@ export default function AllTrains() {
                 >
                   See Details
                 </Link>
+                {user && (
                 <Link
                   to={`/editTrain/${trainData._id}`}
                   className="btn btn-warning btn-sm"
                 >
                   Edit
                 </Link>
+                )}
+                {user && (
                 <button
                   onClick={() => deleteTrain(trainData._id)}
                   className="btn btn-danger btn-sm"
                 >
                   Delete
                 </button>
+                )}
               </div>
             </div>
           </div>

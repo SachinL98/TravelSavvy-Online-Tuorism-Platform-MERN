@@ -62,7 +62,7 @@ export default function Home2() {
   return (
     <>
       {/* <NavbarTop></NavbarTop> */}
-      <NavigationBar/>
+      {/* <NavigationBar/> */}
       <div className="page py-5 px-4 md:py-8 md:px-16">
         <HeroSection></HeroSection>
 

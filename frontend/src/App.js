@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home.js";
+import Home from "./pages/Home/home.js";
 import List from "./pages/Lists/list.js";
 import Hotel from "./pages/Hotel/hotel.js";
 import Login from "./pages/login/Login.js";
@@ -42,11 +42,13 @@ import Search from "./pages/Search/Search.js";
 import Car from "./pages/CarDetails/Car.js";
 import Checkout from "./pages/Checkout/Checkout.js";
 import ReservationSuccessful from "./components/reservationSuccess.js";
+import AddNewCar from "./components/car/AddNewCar";
+import UpdateCar from "./components/car/EditCar";
 
 function App() {
   return (
-    <BrowserRouter> 
-      <Navbar/>
+    <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<List />} />
@@ -60,19 +62,19 @@ function App() {
         <Route path="/addproperty" element={<AddProperty />} />
         <Route path="/updateproperty/:id" element={<UpdateProperty />} />
 
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/hotels" element={<List/>} />
-        <Route path="/hotels/:id" element={<Hotel/>} />
-        <Route path="/events" element={<Events/>} />
-        <Route path="/addEvent" element={<AddEvent/>} />
-        <Route path="/updateEvent/:id" element={<UpdateEvent/>} />
-        <Route path="/manageEvent" element={<UserEvents/>} />
-        <Route path="/wishList" element={<WishList/>} />
-        <Route path="/oneEvent/:id" element={<OneEvent/>} />
-        <Route path="/oneType/:type" element={<OneType/>} />
-        <Route path="/addReview/:eventID" element={<AddReview/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/hotels" element={<List />} />
+        <Route path="/hotels/:id" element={<Hotel />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/addEvent" element={<AddEvent />} />
+        <Route path="/updateEvent/:id" element={<UpdateEvent />} />
+        <Route path="/manageEvent" element={<UserEvents />} />
+        <Route path="/wishList" element={<WishList />} />
+        <Route path="/oneEvent/:id" element={<OneEvent />} />
+        <Route path="/oneType/:type" element={<OneType />} />
+        <Route path="/addReview/:eventID" element={<AddReview />} />
 
         <Route path="/tripPlan" element={<TripPlan />} />
         <Route path="/allTrains" element={<AllTrains />} />
@@ -84,6 +86,8 @@ function App() {
         <Route path="/oneCar/:id" element={<Car />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="reservationSucccess" element={<ReservationSuccessful />} />
+        <Route path="/addNewCar" element={<AddNewCar />} />
+        <Route path="/updateCar" element={<UpdateCar />} />
       </Routes>
     </BrowserRouter>
   );

@@ -5,7 +5,7 @@ import NavigationBar from "../components/navbar";
 export default function () {
   return (
     <div>
-      <NavigationBar/>
+      {/* <NavigationBar/> */}
       <GoogleMapComponent />
     </div>
   );

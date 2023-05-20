@@ -12,7 +12,7 @@ export default function AddNewCar() {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState("");
-  const [isFavorite, setisFavorite] = useState("");
+  const [isFavorite, setIsFavorite] = useState("");
   const [price, setPrice] = useState("");
   const [oldPrice, setOldPrice] = useState("");
   const [seats, setSeats] = useState("");
@@ -26,24 +26,29 @@ export default function AddNewCar() {
   //     setType(event.target.value);
   //   };
 
-  function sendTrainData(event) {
+  function sendCarData(event) {
     event.preventDefault();
 
-    const newTrain = {
+    const newCar = {
       name,
-      description,
-      startStation,
-      endStation,
-      startTime,
-      endTime,
-      imageLink,
+      type,
+      image,
+      isFavorite,
+      price,
+      oldPrice,
+      seats,
+      transition,
+      fuel,
+      image1,
+      image2,
+      image3,
     };
 
     axios
-      .post("http://localhost:8000/train/addTrain/", newTrain)
+      .post("http://localhost:8000/car/addCar/", newCar)
       .then((res) => {
-        window.alert("New Train Is Added !");
-        navigate("/allTrains");
+        window.alert("New Car Is Added !");
+        navigate("/carHome");
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +57,7 @@ export default function AddNewCar() {
 
   return (
     <div>
-      <NavigationBar/>
+      <NavigationBar />
       <form style={{ marginLeft: "30%", marginTop: "20px" }}>
         <br />
         <div className="row md-6">
@@ -62,8 +67,9 @@ export default function AddNewCar() {
             </label>
             <input
               type="text"
+              className="form-control"
               onChange={(event) => {
-                setImageLink(event.target.value);
+                setImage(event.target.value);
               }}
             />
           </div>
@@ -72,7 +78,7 @@ export default function AddNewCar() {
         <div className="row md-6">
           <div className="col-md-6">
             <label className="labels" style={{ float: "left" }}>
-              Enter Train Name :
+              Enter Car Name :
             </label>
             <input
               type="text"
@@ -87,14 +93,14 @@ export default function AddNewCar() {
         <div className="row md-6">
           <div className="col-md-6">
             <label className="labels" style={{ float: "left" }}>
-              Enter Description :
+              Enter Type :
             </label>
             <textarea
               type="text"
               className="form-control"
               required
               onChange={(event) => {
-                setDescription(event.target.value);
+                setType(event.target.value);
               }}
             />
           </div>
@@ -102,27 +108,27 @@ export default function AddNewCar() {
         <div className="row md-6">
           <div className="col-md-3">
             <label className="labels" style={{ float: "left" }}>
-              Enter startStation :
+              Enter isFavorite :
             </label>
             <input
               type="text"
               className="form-control"
               required
               onChange={(event) => {
-                setStartStation(event.target.value);
+                setIsFavorite(event.target.value);
               }}
             />
           </div>
           <div className="col-md-3">
             <label className="labels" style={{ float: "left" }}>
-              Enter end Station :
+              Enter Price :
             </label>
             <input
               type="text"
               className="form-control"
               required
               onChange={(event) => {
-                setendStation(event.target.value);
+                setPrice(event.target.value);
               }}
             />
           </div>
@@ -130,31 +136,109 @@ export default function AddNewCar() {
         <div className="row md-6">
           <div className="col-md-3">
             <label className="labels" style={{ float: "left" }}>
-              Enter startTime :
+              Enter Old Price :
             </label>
             <input
               type="text"
               className="form-control"
               required
               onChange={(event) => {
-                setStartTime(event.target.value);
+                setOldPrice(event.target.value);
               }}
             />
           </div>
           <div className="col-md-3">
             <label className="labels" style={{ float: "left" }}>
-              Enter end Time :
+              Enter Seat Count :
             </label>
             <input
               type="text"
               className="form-control"
               required
               onChange={(event) => {
-                setEndTime(event.target.value);
+                setSeats(event.target.value);
               }}
             />
           </div>
         </div>
+
+        <div className="row md-6">
+          <div className="col-md-3">
+            <label className="labels" style={{ float: "left" }}>
+              Enter Transition :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(event) => {
+                setTransition(event.target.value);
+              }}
+            />
+          </div>
+          <div className="col-md-3">
+            <label className="labels" style={{ float: "left" }}>
+              Enter Fuel Capacity :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(event) => {
+                setFuel(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="row md-6">
+          <div className="col-md-6">
+            <label className="labels" style={{ float: "left" }}>
+              Enter Detail Image 1 :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(event) => {
+                setImage1(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="row md-6">
+          <div className="col-md-6">
+            <label className="labels" style={{ float: "left" }}>
+              Enter Detail Image 2 :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(event) => {
+                setImage2(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="row md-6">
+          <div className="col-md-6">
+            <label className="labels" style={{ float: "left" }}>
+              Enter Detail Image 3 :
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              required
+              onChange={(event) => {
+                setImage3(event.target.value);
+              }}
+            />
+          </div>
+        </div>
+
         <div
           className="row md-6"
           style={{ marginTop: "10px", marginLeft: "1px" }}
@@ -163,9 +247,9 @@ export default function AddNewCar() {
             style={{ width: "80px" }}
             className="btn btn-success"
             type="button"
-            onClick={sendTrainData}
+            onClick={sendCarData}
           >
-            Add Train
+            Add Car
           </button>
         </div>
       </form>
